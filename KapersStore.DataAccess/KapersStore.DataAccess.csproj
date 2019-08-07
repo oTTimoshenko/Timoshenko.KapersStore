@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\KapersStore.Domain\KapersStore.Domain.csproj" />
+    <ProjectReference Include="..\KapersStore.Infrastructure\KapersStore.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>
