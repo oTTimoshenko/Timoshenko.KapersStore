@@ -1,0 +1,30 @@
+<template>
+  <v-navigation-drawer v-model="drawer" app clipped>
+    <v-list dense>
+
+      <treeview-section/>
+
+      <subscribes-section/>
+
+      <settings-section/>
+
+    </v-list>
+  </v-navigation-drawer>
+</template>
+
+<script lang="ts">
+import Vue from "vue";
+import { Component, Prop, Watch } from "vue-property-decorator";
+import TreeviewSection from './treeview-section.vue';
+import SubscribesSection from './subscribes-section.vue';
+import SettingsSection from './settings-section.vue';
+
+@Component({
+  components: {
+    TreeviewSection, SubscribesSection, SettingsSection
+  }
+})
+export default class AppNavigationDrawer extends Vue {
+  @Prop({default: true}) drawer!: boolean;
+}
+</script>
