@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <default-layout/>
+    <DefaultLayout/>
   </div>
 </template>
 
@@ -20,3 +20,9 @@ export default class App extends Vue {
 }
 
 </script>
+
+<style lang="scss">
+.content-text {
+  word-break: break-word;
+}
+</style>

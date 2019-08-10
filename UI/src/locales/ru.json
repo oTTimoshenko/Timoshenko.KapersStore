@@ -1,5 +1,32 @@
 {
-  "app.footer.title": "Kappers Store",
   "app.toolbar.title": "Kappers Store",
-  "app.navigation-panel.areas.subscribes.title": "Подписки"
+
+  "app.navigation-panel.areas.pages.home": "Главная",
+  "app.navigation-panel.areas.pages.available-subscribes": "Каперы",
+  "app.navigation-panel.areas.pages.black-list": "Черный список",
+  "app.navigation-panel.areas.pages.contacts": "Контакты",
+  "app.navigation-panel.areas.pages.report-kaper": "Сообщить о капере",
+  "app.navigation-panel.areas.pages.sales": "Акции и скидки",
+
+
+  "pages.home.title": "Lorem ipsum dolor",
+  "pages.home.content-text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. At elementum eu facilisis sed odio morbi quis. Sit amet porttitor eget dolor morbi non arcu. In hac habitasse platea dictumst vestibulum. Nibh tellus molestie nunc non blandit massa enim. Felis imperdiet proin fermentum leo vel orci. Vel orci porta non pulvinar neque laoreet suspendisse interdum. Justo nec ultrices dui sapien eget. Nullam ac tortor vitae purus. Velit scelerisque in dictum non. Neque laoreet suspendisse interdum consectetur libero id faucibus. Quam quisque id diam vel quam. A cras semper auctor neque vitae tempus. Condimentum mattis pellentesque id nibh. Nunc mattis enim ut tellus elementum sagittis vitae et. Enim eu turpis egestas pretium aenean. Id diam vel quam elementum pulvinar etiam non. Ac turpis egestas maecenas pharetra convallis posuere. Maecenas volutpat blandit aliquam etiam erat velit. Non arcu risus quis varius quam. Ut aliquam purus sit amet luctus venenatis lectus magna. Faucibus ornare suspendisse sed nisi. Consectetur libero id faucibus nisl tincidunt eget nullam. Massa placerat duis ultricies lacus. Gravida cum sociis natoque penatibus et. Dapibus ultrices in iaculis nunc sed augue. Ac turpis egestas sed tempus. Curabitur vitae nunc sed velit dignissim sodales. Ullamcorper morbi tincidunt ornare massa eget egestas purus viverra accumsan. Amet commodo nulla facilisi nullam vehicula ipsum a arcu. Sodales neque sodales ut etiam sit amet. Etiam dignissim diam quis enim lobortis scelerisque. Sed vulputate mi sit amet mauris commodo quis. Nisl vel pretium lectus quam id leo in vitae. In fermentum et sollicitudin ac. Sollicitudin nibh sit amet commodo. Urna porttitor rhoncus dolor purus non. Iaculis nunc sed augue lacus viverra. Orci dapibus ultrices in iaculis nunc sed augue lacus. Amet justo donec enim diam vulputate. Aliquet eget sit amet tellus. Ornare arcu odio ut sem nulla pharetra diam. Morbi tincidunt ornare massa eget egestas. Nisi lacus sed viverra tellus in hac habitasse platea dictumst. Vulputate sapien nec sagittis aliquam malesuada.",
+
+  "pages.kapers.title": "Lorem ipsum dolor",
+  "pages.kapers.content-text.part1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Et odio pellentesque diam volutpat. Accumsan sit amet nulla facilisi morbi tempus. Bibendum neque egestas congue quisque egestas diam in arcu cursus. Vitae turpis massa sed elementum tempus egestas sed. Ultricies tristique nulla aliquet enim tortor. Ipsum suspendisse ultrices gravida dictum fusce. Nunc vel risus commodo viverra maecenas accumsan lacus vel facilisis. ",
+  "pages.kapers.content-text.part2": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Et odio pellentesque diam volutpat. Accumsan sit amet nulla facilisi morbi tempus. Bibendum neque egestas congue quisque egestas diam in arcu cursus. Vitae turpis massa sed elementum tempus egestas sed. Ultricies tristique nulla aliquet enim tortor. Ipsum suspendisse ultrices gravida dictum fusce. Nunc vel risus commodo viverra maecenas accumsan lacus vel facilisis. ",
+
+  "pages.contacts.title": "Lorem ipsum dolor",
+  "pages.contacts.content-text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. At elementum eu facilisis sed odio morbi quis. Sit amet porttitor eget dolor morbi non arcu. In hac habitasse platea dictumst vestibulum. Nibh tellus molestie nunc non blandit massa enim. Felis imperdiet proin fermentum leo vel orci. Vel orci porta non pulvinar neque laoreet suspendisse interdum. Justo nec ultrices dui sapien eget. Nullam ac tortor vitae purus. Velit scelerisque in dictum non. Neque laoreet suspendisse interdum consectetur libero id faucibus. Quam quisque id diam vel quam. A cras semper auctor neque vitae tempus. Condimentum mattis pellentesque id nibh. Nunc mattis enim ut tellus elementum sagittis vitae et. Enim eu turpis egestas pretium aenean. Id diam vel quam elementum pulvinar etiam non. Ac turpis egestas maecenas pharetra convallis posuere. Maecenas volutpat blandit aliquam etiam erat velit. Non arcu risus quis varius quam. Ut aliquam purus sit amet luctus venenatis lectus magna. Faucibus ornare suspendisse sed nisi. Consectetur libero id faucibus nisl tincidunt eget nullam.",
+
+  "pages.sales.title": "Lorem ipsum dolor",
+  "pages.sales.content-text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. At elementum eu facilisis sed odio morbi quis. Sit amet porttitor eget dolor morbi non arcu. In hac habitasse platea dictumst vestibulum. Nibh tellus molestie nunc non blandit massa enim. Felis imperdiet proin fermentum leo vel orci. Vel orci porta non pulvinar neque laoreet suspendisse interdum. Justo nec ultrices dui sapien eget. Nullam ac tortor vitae purus. Velit scelerisque in dictum non. Neque laoreet suspendisse interdum consectetur libero id faucibus. Quam quisque id diam vel quam. A cras semper auctor neque vitae tempus. Condimentum mattis pellentesque id nibh. Nunc mattis enim ut tellus elementum sagittis vitae et. Enim eu turpis egestas pretium aenean. Id diam vel quam elementum pulvinar etiam non. Ac turpis egestas maecenas pharetra convallis posuere. Maecenas volutpat blandit aliquam etiam erat velit. Non arcu risus quis varius quam. Ut aliquam purus sit amet luctus venenatis lectus magna. Faucibus ornare suspendisse sed nisi. Consectetur libero id faucibus nisl tincidunt eget nullam. Massa placerat duis ultricies lacus. Gravida cum sociis natoque penatibus et. Dapibus ultrices in iaculis nunc sed augue.",
+
+
+
+  "app.navigation-panel.areas.subscribes.title": "Ваши подписки",
+
+
+
+  "app.footer.title": "Kappers Store"
 }
