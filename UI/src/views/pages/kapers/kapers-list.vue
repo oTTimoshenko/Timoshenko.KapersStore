@@ -18,14 +18,12 @@
       </v-expansion-panel-header>
       <v-expansion-panel-content pa-0>
         <v-card flat>
-          {{ kaper.description }}
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn class="kaper-buy-button" color="red">
-              Buy
-              <v-icon right>fa-shopping-cart</v-icon>
-            </v-btn>
-          </v-card-actions>
+          <span>{{ kaper.description }}</span>
+          <v-layout>
+            <v-flex>
+              <kaper-subscribes-list :subscribes="kaper.subscribes"></kaper-subscribes-list>
+            </v-flex>
+          </v-layout>
         </v-card>
         
       </v-expansion-panel-content>
@@ -37,7 +35,13 @@
 import Vue from 'vue'
 import { Prop, Component } from 'vue-property-decorator'
 
-@Component({})
+import KaperSubscribesList from './kaper-subscribes-list.vue'
+
+@Component({
+  components: {
+    KaperSubscribesList
+  }
+})
 export default class KapersList extends Vue {
   @Prop({type: [], default: []}) kapers!: any[];
 

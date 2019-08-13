@@ -41,7 +41,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Prop, Component } from 'vue-property-decorator'
-import KaperSubscribesList from './kaper-subscribes-list.vue'
+import KaperSubscribesList from './kaper-details-subscribes-list.vue'
 import CommentsTree from '@/components/layouts/default/comments/CommentsTree.vue'
 
 @Component({
