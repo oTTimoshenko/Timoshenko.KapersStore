@@ -13,7 +13,7 @@
     <v-btn
       color="red"
       text
-      @click="snackbar = false">
+      @click="snackbarModel = false">
       {{$t('Close')}}
     </v-btn>
   </v-snackbar>
@@ -31,6 +31,7 @@ export default class CartAvatar extends Vue {
 
   continueSubscribe() {
     this.$router.push('/kapers');
+    this.snackbarModel = false;
   }
 }
 
