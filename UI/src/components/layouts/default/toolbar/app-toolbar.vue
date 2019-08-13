@@ -20,6 +20,9 @@
 
         </change-language>
       </v-flex>
+      <v-flex shrink mx-5>
+        <cart-avatar></cart-avatar>
+      </v-flex>
       <v-flex shrink>
         <user-avatar></user-avatar>
       </v-flex>
@@ -30,13 +33,16 @@
 <script lang="ts">
 import Vue from "vue";
 import { Component, Prop, Watch } from "vue-property-decorator";
-import ChangeLanguage from './change-language.vue';
+
+import ChangeLanguage from '@/components/layouts/default/locale/change-language.vue';
 import UserAvatar from './user/avatar/UserAvatar.vue';
+import CartAvatar from '@/components/layouts/default/cart/avatar/CartAvatar.vue';
 
 @Component({
   components: {
     ChangeLanguage,
-    UserAvatar
+    UserAvatar,
+    CartAvatar
   }
 })
 export default class AppToolbar extends Vue {

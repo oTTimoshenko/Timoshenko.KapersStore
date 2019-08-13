@@ -5,6 +5,7 @@
             md12>
       {{ new Date().getFullYear() }} — <strong>{{$t('app.footer.title')}}</strong>
     </v-flex>
+    <notification/>
   </v-footer>
 </template>
 
@@ -13,7 +14,13 @@
 import Vue from 'vue';
 import { Component } from 'vue-property-decorator';
 
-@Component({})
+import Notification from '@/components/layouts/default/notifications/snackbar/notification.vue';
+
+@Component({
+  components: {
+    Notification
+  }
+})
 export default class AppFooter extends Vue {
 
 }

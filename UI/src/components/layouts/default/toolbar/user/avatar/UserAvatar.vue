@@ -3,7 +3,7 @@
     <template v-slot:activator="{ on }">
       <v-avatar v-on="on">
         <v-btn icon>
-          <v-icon large>fa-telegram</v-icon>
+          <v-icon x-large>fa-telegram</v-icon>
         </v-btn>
       </v-avatar>
     </template>

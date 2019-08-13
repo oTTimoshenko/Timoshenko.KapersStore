@@ -54,6 +54,11 @@ export default new VueRouter({
       path: '/login',
       name: 'login',
       component: () => import('./components/layouts/default/toolbar/user/login-registration/Login.vue')
+    },
+    {
+      path: '/cart',
+      name: 'cart',
+      component: () => import('./components/layouts/default/cart/Cart.vue')
     }
   ]
 })
