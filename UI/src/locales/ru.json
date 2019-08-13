@@ -2,7 +2,7 @@
   "app.toolbar.title": "Kappers Store",
 
   "app.navigation-panel.areas.pages.home": "Главная",
-  "app.navigation-panel.areas.pages.available-subscribes": "Каперы",
+  "app.navigation-panel.areas.pages.kapers": "Каперы",
   "app.navigation-panel.areas.pages.black-list": "Черный список",
   "app.navigation-panel.areas.pages.contacts": "Контакты",
   "app.navigation-panel.areas.pages.report-kaper": "Сообщить о капере",

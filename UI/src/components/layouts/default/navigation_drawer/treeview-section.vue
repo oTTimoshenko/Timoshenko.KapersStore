@@ -26,12 +26,12 @@ import { Component, Watch } from "vue-property-decorator";
 export default class Treeview extends Vue {
   itemSelected: number | null = null;
   navigationItems: any[] = [
-    { icon: 'featured_play_list', localeKey: 'app.navigation-panel.areas.pages.home', path: '/' },
-    { icon: 'featured_play_list', localeKey: 'app.navigation-panel.areas.pages.available-subscribes', path: '/kapers' },
-    { icon: 'featured_play_list', localeKey: 'app.navigation-panel.areas.pages.sales', path: '/sales' },
-    //{ icon: 'featured_play_list', localeKey: 'app.navigation-panel.areas.pages.black-list', path: '/blackList' },
-    { icon: 'featured_play_list', localeKey: 'app.navigation-panel.areas.pages.contacts', path: '/contacts' },
+    { icon: 'fa-home', localeKey: 'app.navigation-panel.areas.pages.home', path: '/' },
+    { icon: 'fa-list-ul', localeKey: 'app.navigation-panel.areas.pages.kapers', path: '/kapers' },
+    { icon: 'fa-percent', localeKey: 'app.navigation-panel.areas.pages.sales', path: '/sales' },
+    { icon: 'fa-id-card', localeKey: 'app.navigation-panel.areas.pages.contacts', path: '/contacts' },
     //{ icon: 'featured_play_list', localeKey: 'app.navigation-panel.areas.pages.report-kaper', path: '/reportKaper' },
+    //{ icon: 'featured_play_list', localeKey: 'app.navigation-panel.areas.pages.black-list', path: '/blackList' },
   ];
 
   mounted() {
@@ -49,7 +49,7 @@ export default class Treeview extends Vue {
   get currentRouteItem() {
     const item = this.navigationItems.find( i => i.path === this.currentRoute);
 
-    return item || this.navigationItems.find(i => i.path === '/');
+    return item;
   }
 
   @Watch('currentRouteItemIndex')

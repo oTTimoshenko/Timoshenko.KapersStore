@@ -5,22 +5,24 @@
 						 dense>
     <v-app-bar-nav-icon @click.stop="internalDrawer = !internalDrawer"></v-app-bar-nav-icon>
 
-    <v-icon class="mx-4">featured_play_list</v-icon>
-
     <v-toolbar-title class="mr-12 align-center">
-      <span class="title">{{$t('app.toolbar.title')}}</span>
+      <router-link to="/" tag="div">
+        <div class="home-title">
+          <span class="title">{{$t('app.toolbar.title')}}</span>
+        </div>
+      </router-link>
     </v-toolbar-title>
 
     <v-spacer></v-spacer>
+    <v-layout justify-end align-center>
+      <v-flex shrink>
+        <change-language>
 
-    <v-layout align-center style="max-width: 650px">
-      <v-text-field :append-icon-cb="() => {}"
-        						placeholder="Search..."
-        						single-line
-        						append-icon="search"
-        						color="white"
-        						hide-details>
-			</v-text-field>
+        </change-language>
+      </v-flex>
+      <v-flex shrink>
+        <user-avatar></user-avatar>
+      </v-flex>
     </v-layout>
   </v-app-bar>
 </template>
@@ -28,8 +30,15 @@
 <script lang="ts">
 import Vue from "vue";
 import { Component, Prop, Watch } from "vue-property-decorator";
+import ChangeLanguage from './change-language.vue';
+import UserAvatar from './user/avatar/UserAvatar.vue';
 
-@Component({})
+@Component({
+  components: {
+    ChangeLanguage,
+    UserAvatar
+  }
+})
 export default class AppToolbar extends Vue {
   @Prop({default: true}) drawer!: boolean;
   
@@ -47,3 +56,10 @@ export default class AppToolbar extends Vue {
 
 }
 </script>
+
+<style lang="scss" scoped>
+.home-title:hover {
+  cursor: pointer;
+  color: rgb(212, 212, 212);
+}
+</style>

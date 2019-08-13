@@ -16,6 +16,11 @@ export default new VueRouter({
       component: () => import('./views/pages/kapers/Kapers.vue')
     },
     {
+      path: '/kapers/:kaperId/details',
+      name: 'kapers/:kaperId/details',
+      component: () => import('./views/pages/kapers/details/KaperDetails.vue')
+    },
+    {
       path: '/blackList',
       name: 'blackList',
       component: () => import('./views/pages/blackList/BlackList.vue')
@@ -34,6 +39,21 @@ export default new VueRouter({
       path: '/sales',
       name: 'sales',
       component: () => import('./views/pages/sales/Sales.vue')
+    },
+    {
+      path: '/subscribes',
+      name: 'subscribes',
+      component: () => import('./views/pages/subscribes/Subscribes.vue')
+    },
+    {
+      path: '/registration',
+      name: 'registration',
+      component: () => import('./components/layouts/default/toolbar/user/login-registration/Registration.vue')
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: () => import('./components/layouts/default/toolbar/user/login-registration/Login.vue')
     }
   ]
 })
