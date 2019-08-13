@@ -17,7 +17,7 @@ export default new VueRouter({
     },
     {
       path: '/kapers/:kaperId/details',
-      name: 'kapers/:kaperId/details',
+      name: 'kaperDetails',
       component: () => import('./views/pages/kapers/details/KaperDetails.vue')
     },
     {

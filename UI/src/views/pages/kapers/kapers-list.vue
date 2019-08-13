@@ -11,21 +11,35 @@
                    :alt="kaper.altText">
             </v-avatar>
           </v-flex>
-          <v-flex>
+          <v-flex shrink>
             <span class="subtitle-1">{{ kaper.name }}</span>
           </v-flex>
         </v-layout>
       </v-expansion-panel-header>
       <v-expansion-panel-content pa-0>
         <v-card flat>
-          <span>{{ kaper.description }}</span>
-          <v-layout>
+          <v-layout column>
             <v-flex>
-              <kaper-subscribes-list :subscribes="kaper.subscribes"></kaper-subscribes-list>
+              <span>{{ kaper.description }}</span>
+            </v-flex>
+            <v-flex>
+              <v-btn color="red" small @click="goToDetails(kaper.id)">
+                {{$t('Details page')}}
+                <v-icon  right small>
+                  fa-arrow-right
+                </v-icon>
+              </v-btn>
+            </v-flex>
+            <v-flex>
+              <v-layout>
+                <v-flex>
+                  <kaper-subscribes-list :subscribes="kaper.subscribes"></kaper-subscribes-list>
+                </v-flex>
+              </v-layout>
             </v-flex>
           </v-layout>
-        </v-card>
         
+        </v-card>
       </v-expansion-panel-content>
     </v-expansion-panel>
   </v-expansion-panels>
@@ -48,11 +62,20 @@ export default class KapersList extends Vue {
   get Kapers() {
     return this.kapers && this.kapers.length > 0 ? this.kapers : [];
   }
+
+  goToDetails(kaperId: number) {
+    this.$router.push({name: 'kaperDetails', params: { kaperId: kaperId.toString() }})
+  }
 }
 </script>
 
 <style lang="scss" scoped>
 .kaper-buy-button {
   width: 10%;
+}
+
+.app-link {
+  cursor: pointer;
+  color: #F44336;
 }
 </style>
