@@ -6,7 +6,7 @@
 
       <subscribes-section/>
 
-      <settings-section/>
+      <settings-section v-if="withSettings"/>
 
     </v-list>
   </v-navigation-drawer>
@@ -26,5 +26,6 @@ import SettingsSection from './settings-section.vue';
 })
 export default class AppNavigationDrawer extends Vue {
   @Prop({default: true}) drawer!: boolean;
+  @Prop({ default: false}) withSettings!: boolean;
 }
 </script>

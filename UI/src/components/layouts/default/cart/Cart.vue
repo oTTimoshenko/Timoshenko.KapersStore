@@ -73,6 +73,9 @@ export default class Cart extends Vue {
 <style lang="scss" scoped>
 .text-router-link:hover {
   cursor: pointer;
+}
+
+.text-router-link {
   color: #F44336;
 }
 </style>

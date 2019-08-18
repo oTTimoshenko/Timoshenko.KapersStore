@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import { notFoundPageName } from '@/components/layouts/default/constants'
 
 export default new VueRouter({
   mode: 'history',
@@ -59,6 +60,11 @@ export default new VueRouter({
       path: '/cart',
       name: 'cart',
       component: () => import('./components/layouts/default/cart/Cart.vue')
+    },
+    {
+      path: '*',
+      name: notFoundPageName,
+      component: () => import('./components/layouts/default/not_found/NotFound.vue')
     }
   ]
 })
