@@ -19,7 +19,7 @@
         </v-list-item-content>
       </v-list-item>
 
-      <v-list-item @click="">
+      <v-list-item @click="goToRoute('/login')">
         <v-list-item-icon>
           <v-icon>
             fa-telegram
