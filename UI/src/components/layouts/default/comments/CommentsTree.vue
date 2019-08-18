@@ -8,6 +8,10 @@
         <comments-group :commentsGroup="commentsGroup" :key="index">
         </comments-group>
       </template>
+
+      <v-divider></v-divider>
+
+      <add-comment></add-comment>
     </v-layout>
   </v-container>
 
@@ -16,12 +20,16 @@
 <script lang="ts">
 
 import Vue from 'vue';
-import { Component, Prop } from 'vue-property-decorator';
+import { Component, Prop } from 'vue-property-decorator'
+
 import CommentsGroup from './comments-group.vue'
+import AddComment from './add-comment.vue'
+
 
 @Component({
   components: {
-    CommentsGroup
+    CommentsGroup,
+    AddComment
   }
 })
 export default class CommentsTree extends Vue {

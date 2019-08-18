@@ -24,11 +24,11 @@
         {{$t(comment.text)}}
       </v-card-text>
 
-      <v-card-actions>
-        <v-btn right>
+      <v-card-actions v-if="replyable">
+        <v-btn v-if="!isReplyToCommentVisible" right @click="isReplyToCommentVisible = true" color="red">
           {{$t('Respond')}}
-          <v-icon>fa-times</v-icon>
         </v-btn>
+        <reply-to-comment v-if="isReplyToCommentVisible" :isReplyToCommentVisible.sync="isReplyToCommentVisible"></reply-to-comment>
       </v-card-actions>
     </v-card>
   </v-container>
@@ -39,9 +39,18 @@
 import Vue from 'vue';
 import { Component, Prop } from 'vue-property-decorator';
 
-@Component({})
+import ReplyToComment from './reply-to-comment.vue'
+
+@Component({
+  components: {
+    ReplyToComment
+  }
+})
 export default class Comment extends Vue {
   @Prop() comment!: any;
+  @Prop({default: false}) replyable!: boolean;
+
+  isReplyToCommentVisible: boolean = false;
 }
 
 </script>

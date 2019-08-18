@@ -2,7 +2,7 @@
   <div id="app">
     <v-app id="inspire" dark>
       <v-content>
-        <v-img width="100%" max-height="100vh"  src="http://getwallpapers.com/wallpaper/full/8/c/c/29000.jpg">
+        <v-img width="100%" max-height="100vh" src="http://getwallpapers.com/wallpaper/full/8/c/c/29000.jpg">
           <v-container pa-12 fill-height>
             <v-layout column align-center justify-center>
               <v-flex shrink>
