@@ -9,10 +9,10 @@
           <v-flex mx-12>
             <v-layout align-center>
               <v-flex shrink>
-                <span class="title">{{item.kaperName}}</span>
+                <span class="title">{{item.name}}</span>
               </v-flex>
               <v-flex mx-1 v-if="hover">
-                <v-btn small icon>
+                <v-btn @click="removeKaper()" small icon>
                   <v-icon>fa-times</v-icon>
                 </v-btn>
               </v-flex>
@@ -37,7 +37,7 @@
                           <span class="subtitle-1">{{subscription.name}}</span>
                         </v-flex>
                         <v-flex mx-1 v-if="hover">
-                          <v-btn x-small icon>
+                          <v-btn @click="removeSubscription(subscription.id)" x-small icon>
                             <v-icon>fa-times</v-icon>
                           </v-btn>
                         </v-flex>
@@ -75,16 +75,29 @@
 import Vue from 'vue';
 import { Component, Prop } from 'vue-property-decorator';
 
+import { CartKaper, CartSubscription, CartState } from './types';
+
+import cartService from './cartService';
+import EventBus from '@/plugins/eventBus'
+
 @Component({})
 export default class CartItem extends Vue {
-  @Prop() item!: any;
+  @Prop() item!: CartKaper;
 
-  minusCount(subscription: any) {
-    subscription.count = subscription.count > 1 ? subscription.count - 1 : 1;
+  minusCount(subscription: CartSubscription) {
+    subscription.minusCount();
   }
 
   plusCount(subscription: any) {
-    subscription.count++;
+    subscription.plusCount();
+  }
+
+  removeKaper() {
+    EventBus.$emit('cart:remove-kaper', this.item.id);
+  }
+
+  removeSubscription(id: number) {
+    EventBus.$emit('cart:remove-subscription', id);
   }
 }
 

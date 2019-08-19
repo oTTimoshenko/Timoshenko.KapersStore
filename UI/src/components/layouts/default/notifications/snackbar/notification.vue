@@ -1,6 +1,6 @@
 <template>
   <v-snackbar
-    timeout="15000"
+    :timeout="15000"
     v-model="snackbarModel">
     {{ message }}
 

@@ -16,9 +16,21 @@
 import Vue from 'vue';
 import { Component, Prop } from 'vue-property-decorator';
 
+import cartService from './../cartService';
+import EventBus from '@/plugins/eventBus'
+
 @Component({})
 export default class CartAvatar extends Vue {
   cartSubscribesCount: number = 3;
+
+  created() {
+    EventBus.$on('cart:changed', this.reloadSubscribesCount);
+  }
+
+  reloadSubscribesCount() {
+    const cart = cartService.state;
+    this.cartSubscribesCount = cart ? cart.subscriptionsCount : 0;
+  }
 
   goToCart() {
     this.$router.push('/cart');
