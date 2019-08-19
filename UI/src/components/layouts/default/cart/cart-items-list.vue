@@ -16,7 +16,6 @@ import { Component, Prop } from 'vue-property-decorator';
 import CartItem from './cart-item.vue'
 
 import { CartKaper } from './types';
-import EventBus from '@/plugins/eventBus'
 
 @Component({
   components: {
@@ -25,20 +24,6 @@ import EventBus from '@/plugins/eventBus'
 })
 export default class CartItemsList extends Vue {
   @Prop() items!: CartKaper[];
-
-  mounted() {
-    EventBus.$on('cart:remove-kaper', this.removeKaper);
-    EventBus.$on('cart:remove-subscription', (id: number) => this.removeSubscription(id));
-  }
-
-  removeKaper(id: number) {
-    EventBus.$emit('cart:remove-kaper', id);
-  }
-
-  removeSubscription(id: number) {
-    debugger
-    EventBus.$emit('cart:remove-subscription', id);
-  }
 }
 
 </script>

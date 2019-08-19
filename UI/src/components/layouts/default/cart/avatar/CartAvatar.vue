@@ -27,6 +27,10 @@ export default class CartAvatar extends Vue {
     EventBus.$on('cart:changed', this.reloadSubscribesCount);
   }
 
+  mounted() {
+    this.reloadSubscribesCount();
+  }
+
   reloadSubscribesCount() {
     const cart = cartService.state;
     this.cartSubscribesCount = cart ? cart.subscriptionsCount : 0;
