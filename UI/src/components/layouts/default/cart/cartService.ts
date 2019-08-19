@@ -18,14 +18,16 @@ class CartService {
   }
 
   addItem(kaper: CartKaper) {
+    
     if(isNullOrUndefined(this.state)) return;
 
     const state = this.state;
-    const stateKaper = this.state.getKaper(kaper.id);
+    state.addKaper(kaper);
+    // const stateKaper = this.state.getKaper(kaper.id);
 
-    stateKaper 
-          ? stateKaper.addSubscription(kaper.subscriptions[0])
-          : state.addKaper(kaper);
+    // stateKaper 
+    //       ? stateKaper.addSubscription(kaper.subscriptions[0])
+    //       : state.addKaper(kaper);
 
     this.setState(state);
   }
@@ -34,7 +36,7 @@ class CartService {
     if(isNullOrUndefined(this.state)) return;
 
     const state = this.state;
-
+    
     state.removeKaper(id);
     cart.removeKaper(id);
 

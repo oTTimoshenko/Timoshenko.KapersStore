@@ -1,21 +1,21 @@
 <template>
   <v-list>
     <v-list-item
-      v-for="(subscribe, index) in subscribes"
+      v-for="(subscription, index) in subscriptions"
       :key="index">
       <v-layout column>
 
       
         <v-layout align-center>
           <v-flex>
-            <span class="subtitle-1">{{ subscribe.name }}</span>
+            <span class="subtitle-1">{{ subscription.name }}</span>
           </v-flex>
           <v-flex shrink mx-7>
-            <span class="subtitle-1">{{ $t(subscribe.price + ' руб.') }}</span>
+            <span class="subtitle-1">{{ $t(subscription.price + ' руб.') }}</span>
           </v-flex>
           <v-flex shrink>
-            <v-btn class="kaper-buy-button" color="red">
-              Buy
+            <v-btn @click="addSubscriptionToCart(subscription.id)" class="kaper-buy-button" color="red">
+              {{$t('Buy')}}
               <v-icon right>fa-shopping-cart</v-icon>
             </v-btn>
           </v-flex>
@@ -30,9 +30,15 @@
 import Vue from 'vue'
 import { Prop, Component } from 'vue-property-decorator'
 
+import EventBus from '@/plugins/eventBus'
+
 @Component({})
 export default class KapersList extends Vue {
-  @Prop({type: [], default: []}) subscribes!: any[];
+  @Prop({default: []}) subscriptions!: any[];
+
+  addSubscriptionToCart(id: number) {
+    EventBus.$emit('kaper-subscriptions:add-to-cart', id);
+  }
 }
 </script>
 

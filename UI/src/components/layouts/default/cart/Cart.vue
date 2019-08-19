@@ -5,7 +5,10 @@
         {{$t('Cart')}}
       </v-card-title>
       <v-divider></v-divider>
-      <v-card-text>
+      <v-card-text v-if="cart.subscriptionsCount <= 0" class="cart-items-container text-md-center">
+        <span class="display-1">{{$t('Your cart is empty')}}</span> 
+      </v-card-text>
+      <v-card-text  v-else class="cart-items-container">
         <cart-items-list :items="cart.items"></cart-items-list>
         <v-layout mb-5 align-center justify-end>
           <v-flex shrink>
@@ -25,7 +28,7 @@
               <span class="text-router-link">{{$t('Продолжить покупки...')}}</span>
             </router-link>
           </v-flex>
-          <v-flex md4 ma-1>
+          <v-flex md4 ma-1 v-if="cart.subscriptionsCount > 0">
             <v-btn color="red" block large>
               <span class="title">{{$t('BUY')}}</span> 
               <v-icon size="25" right>fa-shopping-cart</v-icon>
@@ -54,13 +57,13 @@ import EventBus from '@/plugins/eventBus'
   }
 })
 export default class Cart extends Vue {
-  cart: CartState = //new CartState([]);
-new CartState([    new CartKaper(1, 'Kaper1', [  new CartSubscription(1, 'Subscription1', 110),
-                                  new CartSubscription(2, 'Subscription2', 110),
-                                  new CartSubscription(3, 'Subscription3', 110),  ]),
-    new CartKaper(2, 'Kaper2', [  new CartSubscription(4, 'Subscription1', 110),
-                                  new CartSubscription(5, 'Subscription2', 110)  ]),
-    ]);
+  cart: CartState = new CartState([]);
+// new CartState([    new CartKaper(1, 'Kaper1', [  new CartSubscription(1, 'Subscription1', 110),
+//                                   new CartSubscription(2, 'Subscription2', 110),
+//                                   new CartSubscription(3, 'Subscription3', 110),  ]),
+//     new CartKaper(2, 'Kaper2', [  new CartSubscription(4, 'Subscription1', 110),
+//                                   new CartSubscription(5, 'Subscription2', 110)  ]),
+//     ]);
     
 
   mounted() {
@@ -72,9 +75,9 @@ new CartState([    new CartKaper(1, 'Kaper1', [  new CartSubscription(1, 'Subscr
   }
 
   created() {
+    EventBus.$off(['cart:remove-kaper', 'cart:remove-subscription']);
     EventBus.$on('cart:remove-kaper', this.removeKaper);
     EventBus.$on('cart:remove-subscription', this.removeSubscription);
-
   }
 
   removeKaper(id: number) {
@@ -100,5 +103,9 @@ new CartState([    new CartKaper(1, 'Kaper1', [  new CartSubscription(1, 'Subscr
 
 .text-router-link {
   color: #F44336;
+}
+
+.cart-items-container {
+  min-height: 25vh
 }
 </style>

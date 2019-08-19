@@ -26,7 +26,7 @@
     </v-flex>
     <v-flex>
       <v-layout align-center>
-        <v-flex md6 offset-md1>
+        <v-flex md8 offset-md1>
           <v-layout column>
               <v-flex v-for="(subscription, index) in item.subscriptions" :key="index" offset-md-1>
                 <v-hover v-slot:default="{ hover }">

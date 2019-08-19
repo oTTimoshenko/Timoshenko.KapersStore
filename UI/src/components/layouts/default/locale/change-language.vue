@@ -45,7 +45,7 @@ export default class Login extends Vue {
 
   @Watch('languageSelected')
   onLanguageChanged(value: string) {
-    debugger;
+    ;
     if(isNullOrUndefined(value))
       this.$i18n.locale = 'ru'
     else

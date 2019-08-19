@@ -18,7 +18,7 @@ class CartSubscription {
   constructor(id: number, name: string, price: number, count?: number) {
     this.id = id;
     this.name = name;
-    this.count = count || 0;
+    this.count = count || 1;
     this.price = price;
   }
 
@@ -114,12 +114,23 @@ class CartState {
   }
 
   addKaper(kaper: CartKaper) {
+    
     const item = this.items.find(i => i.id === kaper.id);
     
     if(item) {
       const index = this.items.indexOf(item);
 
-      if(index !== -1) this.items[index] = kaper;
+      if(index !== -1) {
+        for(const newSubscription of kaper.subscriptions) {
+          const subscription = this.items[index].subscriptions.find(s => s.id === newSubscription.id);
+          
+          if(subscription) {
+            subscription.plusCount(newSubscription.count)
+          }
+          else 
+            this.items[index].addSubscription(newSubscription);
+        }
+      }
     } else 
       this.items.push(kaper);
   }

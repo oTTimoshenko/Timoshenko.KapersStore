@@ -16,19 +16,26 @@
 import Vue from 'vue';
 import { Component, Prop } from 'vue-property-decorator';
 
+import { CartKaper } from '@/components/layouts/default/cart/types';
 import cartService from './../cartService';
 import EventBus from '@/plugins/eventBus'
 
 @Component({})
 export default class CartAvatar extends Vue {
-  cartSubscribesCount: number = 3;
+  cartSubscribesCount: number = 0;
 
   created() {
+    EventBus.$off(['cart:changed', 'cart:item-added']);
     EventBus.$on('cart:changed', this.reloadSubscribesCount);
+    EventBus.$on('cart:item-added', this.addItem);
   }
 
   mounted() {
     this.reloadSubscribesCount();
+  }
+
+  addItem(kaper: CartKaper) {
+    cartService.addItem(kaper);
   }
 
   reloadSubscribesCount() {

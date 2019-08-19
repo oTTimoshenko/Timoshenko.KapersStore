@@ -33,7 +33,7 @@
             <v-flex>
               <v-layout>
                 <v-flex>
-                  <kaper-subscribes-list :subscribes="kaper.subscribes"></kaper-subscribes-list>
+                  <kaper-subscribes-list :subscriptions="kaper.subscriptions"></kaper-subscribes-list>
                 </v-flex>
               </v-layout>
             </v-flex>
@@ -51,13 +51,16 @@ import { Prop, Component } from 'vue-property-decorator'
 
 import KaperSubscribesList from './kaper-subscribes-list.vue'
 
+import { CartKaper, CartSubscription, CartState } from '@/components/layouts/default/cart/types';
+import EventBus from '@/plugins/eventBus'
+
 @Component({
   components: {
     KaperSubscribesList
   }
 })
 export default class KapersList extends Vue {
-  @Prop({type: [], default: []}) kapers!: any[];
+  @Prop({default: []}) kapers!: any[];
 
   get Kapers() {
     return this.kapers && this.kapers.length > 0 ? this.kapers : [];
@@ -65,6 +68,21 @@ export default class KapersList extends Vue {
 
   goToDetails(kaperId: number) {
     this.$router.push({name: 'kaperDetails', params: { kaperId: kaperId.toString() }})
+  }
+
+  created() {
+    EventBus.$off('kaper-subscriptions:add-to-cart');
+    EventBus.$on('kaper-subscriptions:add-to-cart', this.addKaperToCart);
+  }
+
+  addKaperToCart(subscriptionId: number) {
+    debugger
+    const kaper = this.kapers.find(k => k.subscriptions
+                                    .find(s => s.id === subscriptionId));
+
+    const cartKaper = new CartKaper(kaper.id, kaper.name, kaper.subscriptions.filter(s => s.id === subscriptionId).map(s => new CartSubscription(s.id, s.name, s.price)));
+
+    EventBus.$emit('cart:item-added', cartKaper);
   }
 }
 </script>

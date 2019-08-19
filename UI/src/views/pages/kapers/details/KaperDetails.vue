@@ -26,7 +26,7 @@
         <v-divider insite></v-divider>
       </v-flex>
       <v-flex>
-        <kaper-subscribes-list :subscribes="subscribes"></kaper-subscribes-list>
+        <kaper-subscribes-list :subscriptions="kaperDetails.subscriptions"></kaper-subscribes-list>
       </v-flex>
       <v-flex my-5>
         <v-divider insite></v-divider>
@@ -44,6 +44,9 @@ import { Prop, Component } from 'vue-property-decorator'
 import KaperSubscribesList from './kaper-details-subscribes-list.vue'
 import CommentsTree from '@/components/layouts/default/comments/CommentsTree.vue'
 
+import { CartKaper, CartSubscription, CartState } from '@/components/layouts/default/cart/types';
+import EventBus from '@/plugins/eventBus'
+
 @Component({
   components: {
     KaperSubscribesList,
@@ -51,13 +54,16 @@ import CommentsTree from '@/components/layouts/default/comments/CommentsTree.vue
   }
 })
 export default class KapersDetails extends Vue {
-  subscribes: any[] = [
-    { name: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. At elementum eu facilisis sed odio morbi quis. Sit amet porttitor eget dolor morbi non arcu.', price: '1950 руб.'  },
-    { name: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. At elementum eu facilisis sed odio morbi quis. Sit amet porttitor eget dolor morbi non arcu.', price: '1950 руб.'  },
-    { name: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. At elementum eu facilisis sed odio morbi quis. Sit amet porttitor eget dolor morbi non arcu.', price: '1950 руб.'  },
-    { name: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. At elementum eu facilisis sed odio morbi quis. Sit amet porttitor eget dolor morbi non arcu.', price: '1950 руб.'  },
-    { name: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. At elementum eu facilisis sed odio morbi quis. Sit amet porttitor eget dolor morbi non arcu.', price: '1950 руб.'  }
-  ]
+  kaperDetails: any = {
+    id: 1,
+    name: 'Kaper1',
+    subscriptions: [
+      { id: 1, name: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. At elementum eu facilisis sed odio morbi quis. Sit amet porttitor eget dolor morbi non arcu.', price: 1950  },
+      { id: 2, name: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. At elementum eu facilisis sed odio morbi quis. Sit amet porttitor eget dolor morbi non arcu.', price: 1950  },
+      { id: 3, name: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. At elementum eu facilisis sed odio morbi quis. Sit amet porttitor eget dolor morbi non arcu.', price: 1950  },
+      { id: 4, name: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. At elementum eu facilisis sed odio morbi quis. Sit amet porttitor eget dolor morbi non arcu.', price: 1950  },
+      { id: 5, name: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. At elementum eu facilisis sed odio morbi quis. Sit amet porttitor eget dolor morbi non arcu.', price: 1950  }
+  ]}
 
   comments: any[] = [
     { id: 1, userNickname: 'Andrew0', date: 'March 2019, 18:46', text: 'Hi everyone', parentId: 0 },
@@ -67,6 +73,19 @@ export default class KapersDetails extends Vue {
     { id: 5, userNickname: 'Andrew4', date: 'March 2019, 18:46', text: 'Hi everyone', parentId: 4 },
     { id: 6, userNickname: 'Andrew5', date: 'March 2019, 18:46', text: 'Hi everyone', parentId: 0 },
   ]
+
+  created() {
+    EventBus.$off('kaper-subscriptions:add-to-cart');
+    EventBus.$on('kaper-subscriptions:add-to-cart', this.addKaperToCart);
+  }
+
+  addKaperToCart(subscriptionId: number) {
+    debugger
+
+    const cartKaper = new CartKaper(this.kaperDetails.id, this.kaperDetails.name, this.kaperDetails.subscriptions.filter(s => s.id === subscriptionId).map(s => new CartSubscription(s.id, s.name, s.price)));
+
+    EventBus.$emit('cart:item-added', cartKaper);
+  }
 
   get kaperId() {
     return +this.$route.params.kaperId;

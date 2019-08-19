@@ -1,25 +1,25 @@
 <template>
   <v-expansion-panels multiple popout>
     <v-expansion-panel
-      v-for="(subscribe, index) in subscribes"
+      v-for="(subscription, index) in subscriptions"
       :key="index">
       <v-expansion-panel-header>
         <v-layout align-center>
           <v-flex shrink>
-            <span class="subtitle-1">{{ subscribe.name }}</span>
+            <span class="subtitle-1">{{ subscription.name }}</span>
           </v-flex>
           <v-flex>
-            <span class="subtitle-1">{{ subscribe.price }}</span>
+            <span class="subtitle-1">{{ $t(subscription.price + ' руб.') }}</span>
           </v-flex>
         </v-layout>
       </v-expansion-panel-header>
       <v-expansion-panel-content pa-0>
         <v-card flat>
-          {{ subscribe.description }}
+          {{ subscription.description }}
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn class="kaper-buy-button" color="red">
-              Buy
+            <v-btn @click="addSubscriptionToCart(subscription.id)" class="kaper-buy-button" color="red">
+              {{$t('Buy')}}
               <v-icon right>fa-shopping-cart</v-icon>
             </v-btn>
           </v-card-actions>
@@ -34,9 +34,15 @@
 import Vue from 'vue'
 import { Prop, Component } from 'vue-property-decorator'
 
+import EventBus from '@/plugins/eventBus'
+
 @Component({})
 export default class KapersList extends Vue {
-  @Prop({type: [], default: []}) subscribes!: any[];
+  @Prop({type: [], default: []}) subscriptions!: any[];
+
+  addSubscriptionToCart(id: number) {
+    EventBus.$emit('kaper-subscriptions:add-to-cart', id);
+  }
 }
 </script>
 
