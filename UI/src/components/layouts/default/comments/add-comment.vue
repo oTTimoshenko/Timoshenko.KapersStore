@@ -3,19 +3,23 @@
     <v-card>
 
       <v-card-text>
-        <v-textarea :label="$t('New comment')"
+        <v-textarea ref="comment"
+                    :label="$t('New comment')"
                     :placeholder="$t('Put here your text...')"
                     rows="7"
                     counter="250"
                     color="red"
                     outlined
-                    no-resize>
+                    no-resize
+                    required
+                    v-model="text"
+                    >
         </v-textarea>
       </v-card-text>
 
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn right color="red">
+        <v-btn @click="addComment" right color="red" :disabled="text.length <= 0">
           {{$t('Add comment')}}
         </v-btn>
       </v-card-actions>
@@ -28,8 +32,17 @@
 import Vue from 'vue';
 import { Component, Prop } from 'vue-property-decorator';
 
+import EventBus from '@/plugins/eventBus'
+import { KaperComment } from '@/components/layouts/default/comments/types';
+
 @Component({})
 export default class AddComment extends Vue {
+  text: string = '';
+
+  addComment() {
+    EventBus.$emit('comments:added', new KaperComment(0, 0, 'Static User Nickname', new Date().toLocaleString(), this.text));
+    this.text = '';
+  }
 }
 
 </script>

@@ -32,7 +32,7 @@
         <v-divider insite></v-divider>
       </v-flex>
       <v-flex>
-        <comments-tree :comments="comments"></comments-tree>
+        <comments-tree :commentsTree="commentsTree"></comments-tree>
       </v-flex>
     </v-layout>
   </v-container>
@@ -46,6 +46,7 @@ import CommentsTree from '@/components/layouts/default/comments/CommentsTree.vue
 
 import { CartKaper, CartSubscription, CartState } from '@/components/layouts/default/cart/types';
 import EventBus from '@/plugins/eventBus'
+import { KaperComment, KaperCommentsTree } from '@/components/layouts/default/comments/types';
 
 @Component({
   components: {
@@ -65,18 +66,34 @@ export default class KapersDetails extends Vue {
       { id: 5, name: 'Lorem ipsum dolor sit amet', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ', price: 1950, days: 31  }
   ]}
 
-  comments: any[] = [
-    { id: 1, userNickname: 'Andrew0', date: 'March 2019, 18:46', text: 'Hi everyone', parentId: 0 },
-    { id: 2, userNickname: 'Andrew1', date: 'March 2019, 18:46', text: 'Hi everyone', parentId: 1 },
-    { id: 3, userNickname: 'Andrew2', date: 'March 2019, 18:46', text: 'Hi everyone', parentId: 1 },
-    { id: 4, userNickname: 'Andrew3', date: 'March 2019, 18:46', text: 'Hi everyone', parentId: 0 },
-    { id: 5, userNickname: 'Andrew4', date: 'March 2019, 18:46', text: 'Hi everyone', parentId: 4 },
-    { id: 6, userNickname: 'Andrew5', date: 'March 2019, 18:46', text: 'Hi everyone', parentId: 0 },
-  ]
+  comments: KaperComment[] = [
+    new KaperComment(1, 0, 'Andrew0', 'March 2019, 18:46', 'Hi everyone'),
+    new KaperComment(2, 1, 'Andrew1', 'March 2019, 18:46', 'Hi everyone'),
+    new KaperComment(3, 1, 'Andrew2', 'March 2019, 18:46', 'Hi everyone'),
+    new KaperComment(4, 0, 'Andrew3', 'March 2019, 18:46', 'Hi everyone'),
+    new KaperComment(5, 4, 'Andrew4', 'March 2019, 18:46', 'Hi everyone'),
+    new KaperComment(6, 0, 'Andrew5', 'March 2019, 18:46', 'Hi everyone'),
+  ];
+
+  commentsTree: KaperCommentsTree = new KaperCommentsTree();
 
   created() {
-    EventBus.$off('kaper-subscriptions:add-to-cart');
+    EventBus.$off(['kaper-subscriptions:add-to-cart', 'comments:added', 'comments:remove']);
+
     EventBus.$on('kaper-subscriptions:add-to-cart', this.addKaperToCart);
+    EventBus.$on('comments:added', this.addComment);
+    EventBus.$on('comments:remove', this.removeComment);
+
+    if(this.comments) this.commentsTree = new KaperCommentsTree(this.comments);
+  }
+
+  addComment(comment: KaperComment) {
+    comment.id = this.commentsTree.nextId();
+    this.commentsTree.addComment(comment);
+  }
+
+  removeComment(id: number) {
+    this.commentsTree.removeComment(id);
   }
 
   addKaperToCart(subscriptionId: number) {

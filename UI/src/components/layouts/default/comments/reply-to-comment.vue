@@ -15,13 +15,14 @@
                     counter="250"
                     color="red"
                     outlined
-                    no-resize>
+                    no-resize
+                    v-model="text">
         </v-textarea>
       </v-card-text>
 
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn @click="reply" right color="red">
+        <v-btn @click="reply" right color="red" :disabled="text.length <= 0">
           {{$t('Reply')}}
         </v-btn>
       </v-card-actions>
@@ -34,15 +35,27 @@
 import Vue from 'vue';
 import { Component, Prop } from 'vue-property-decorator';
 
+import EventBus from '@/plugins/eventBus'
+import { KaperComment } from '@/components/layouts/default/comments/types';
+
 @Component({})
 export default class ReplyToComment extends Vue {
+  @Prop() parentId!: number;
   @Prop({default: false}) isReplyToCommentVisible!: boolean;
 
+  text: string = '';
+
+  addComment() {
+    EventBus.$emit('comments:added', new KaperComment(0, this.parentId, 'Static User Nickname', new Date().toLocaleString(), this.text));
+  }
+
   closeReply() {
+    this.text = '';
     this.$emit('update:isReplyToCommentVisible', false);
   }
 
   reply() {
+    this.addComment();
     this.closeReply();
   }
 }
