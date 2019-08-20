@@ -58,11 +58,11 @@ export default class KapersDetails extends Vue {
     id: 1,
     name: 'Kaper1',
     subscriptions: [
-      { id: 1, name: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. At elementum eu facilisis sed odio morbi quis. Sit amet porttitor eget dolor morbi non arcu.', price: 1950  },
-      { id: 2, name: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. At elementum eu facilisis sed odio morbi quis. Sit amet porttitor eget dolor morbi non arcu.', price: 1950  },
-      { id: 3, name: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. At elementum eu facilisis sed odio morbi quis. Sit amet porttitor eget dolor morbi non arcu.', price: 1950  },
-      { id: 4, name: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. At elementum eu facilisis sed odio morbi quis. Sit amet porttitor eget dolor morbi non arcu.', price: 1950  },
-      { id: 5, name: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. At elementum eu facilisis sed odio morbi quis. Sit amet porttitor eget dolor morbi non arcu.', price: 1950  }
+      { id: 1, name: 'Lorem ipsum dolor sit amet', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ', price: 1950, days: 7  },
+      { id: 2, name: 'Lorem ipsum dolor sit amet', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ', price: 1950, days: 14  },
+      { id: 3, name: 'Lorem ipsum dolor sit amet', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ', price: 1950, days: 10  },
+      { id: 4, name: 'Lorem ipsum dolor sit amet', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ', price: 1950, days: 21  },
+      { id: 5, name: 'Lorem ipsum dolor sit amet', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ', price: 1950, days: 31  }
   ]}
 
   comments: any[] = [
@@ -80,7 +80,9 @@ export default class KapersDetails extends Vue {
   }
 
   addKaperToCart(subscriptionId: number) {
-    const cartKaper = new CartKaper(this.kaperDetails.id, this.kaperDetails.name, this.kaperDetails.subscriptions.filter(s => s.id === subscriptionId).map(s => new CartSubscription(s.id, s.name, s.price)));
+    const cartKaper = new CartKaper(this.kaperDetails.id, this.kaperDetails.name, 
+      this.kaperDetails.subscriptions.filter(s => s.id === subscriptionId)
+                                        .map(s => new CartSubscription(s.id, s.name, s.price, s.days)));
 
     EventBus.$emit('cart:item-added', cartKaper);
   }

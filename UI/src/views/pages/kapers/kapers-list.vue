@@ -79,7 +79,7 @@ export default class KapersList extends Vue {
     const kaper = this.kapers.find(k => k.subscriptions
                                     .find(s => s.id === subscriptionId));
 
-    const cartKaper = new CartKaper(kaper.id, kaper.name, kaper.subscriptions.filter(s => s.id === subscriptionId).map(s => new CartSubscription(s.id, s.name, s.price)));
+    const cartKaper = new CartKaper(kaper.id, kaper.name, kaper.subscriptions.filter(s => s.id === subscriptionId).map(s => new CartSubscription(s.id, s.name, s.price, s.days)));
 
     EventBus.$emit('cart:item-added', cartKaper);
   }

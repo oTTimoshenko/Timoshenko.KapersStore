@@ -6,18 +6,24 @@ class CartSubscription {
   name!: string;
   count!: number;
   price!: number;
+  days!: number;
 
   public get totalPrice() {
     return this.count * this.price;
   }
 
-  static getCloneOfObj(subscription: CartSubscription) {
-    return new CartSubscription(subscription.id, subscription.name, subscription.price, subscription.count);
+  public get totalDays() {
+    return this.count * this.days;
   }
 
-  constructor(id: number, name: string, price: number, count?: number) {
+  static getCloneOfObj(subscription: CartSubscription) {
+    return new CartSubscription(subscription.id, subscription.name, subscription.price, subscription.days, subscription.count);
+  }
+
+  constructor(id: number, name: string, price: number, days: number, count?: number) {
     this.id = id;
     this.name = name;
+    this.days = days;
     this.count = count || 1;
     this.price = price;
   }

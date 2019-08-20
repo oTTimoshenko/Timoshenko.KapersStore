@@ -8,7 +8,7 @@
       
         <v-layout align-center>
           <v-flex>
-            <span class="subtitle-1">{{ subscription.name }}</span>
+            <span class="subtitle-1">{{`${subscription.name} (${subscription.totalDays} days)`}}</span>
           </v-flex>
           <v-flex shrink mx-7>
             <span class="subtitle-1">{{ $t(subscription.price + ' руб.') }}</span>

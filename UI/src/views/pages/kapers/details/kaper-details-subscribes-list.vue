@@ -6,7 +6,7 @@
       <v-expansion-panel-header>
         <v-layout align-center>
           <v-flex shrink>
-            <span class="subtitle-1">{{ subscription.name }}</span>
+            <span class="subtitle-1">{{`${subscription.name} (${subscription.totalDays} days)`}}</span>
           </v-flex>
           <v-flex>
             <span class="subtitle-1">{{ $t(subscription.price + ' руб.') }}</span>

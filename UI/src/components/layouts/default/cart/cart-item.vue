@@ -34,7 +34,7 @@
                     <v-flex grow>
                       <v-layout align-center>
                         <v-flex shrink>
-                          <span class="subtitle-1">{{subscription.name}}</span>
+                          <span class="subtitle-1">{{`${subscription.name} (${subscription.totalDays} days)`}}</span>
                         </v-flex>
                         <v-flex mx-1 v-if="hover">
                           <v-btn @click="removeSubscription(subscription.id)" x-small icon>
