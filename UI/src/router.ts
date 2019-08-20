@@ -42,9 +42,9 @@ export default new VueRouter({
       component: () => import('./views/pages/sales/Sales.vue')
     },
     {
-      path: '/subscribes',
-      name: 'subscribes',
-      component: () => import('./views/pages/subscribes/Subscribes.vue')
+      path: '/subscriptions',
+      name: 'subscriptions',
+      component: () => import('./views/pages/subscriptions/Subscriptions.vue')
     },
     {
       path: '/registration',

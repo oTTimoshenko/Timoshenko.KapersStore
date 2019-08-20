@@ -3,7 +3,7 @@
       bottom
       color="blue">
       <template v-slot:badge>
-        <span>{{cartSubscribesCount}}</span>
+        <span>{{cartSubscriptionsCount}}</span>
       </template>
       <v-btn small icon @click="goToCart()">
         <v-icon size="30">fa-shopping-cart</v-icon>
@@ -22,25 +22,25 @@ import EventBus from '@/plugins/eventBus'
 
 @Component({})
 export default class CartAvatar extends Vue {
-  cartSubscribesCount: number = 0;
+  cartSubscriptionsCount: number = 0;
 
   created() {
     EventBus.$off(['cart:changed', 'cart:item-added']);
-    EventBus.$on('cart:changed', this.reloadSubscribesCount);
+    EventBus.$on('cart:changed', this.reloadSubscriptionsCount);
     EventBus.$on('cart:item-added', this.addItem);
   }
 
   mounted() {
-    this.reloadSubscribesCount();
+    this.reloadSubscriptionsCount();
   }
 
   addItem(kaper: CartKaper) {
     cartService.addItem(kaper);
   }
 
-  reloadSubscribesCount() {
+  reloadSubscriptionsCount() {
     const cart = cartService.state;
-    this.cartSubscribesCount = cart ? cart.subscriptionsCount : 0;
+    this.cartSubscriptionsCount = cart ? cart.subscriptionsCount : 0;
   }
 
   goToCart() {

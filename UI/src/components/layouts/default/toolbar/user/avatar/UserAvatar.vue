@@ -8,14 +8,14 @@
       </v-avatar>
     </template>
     <v-list>
-      <v-list-item @click="goToRoute('/subscribes')">
+      <v-list-item @click="goToRoute('/subscriptions')">
         <v-list-item-icon>
           <v-icon>
             fa-telegram
           </v-icon>
         </v-list-item-icon>
         <v-list-item-content>
-          <v-list-item-title>{{$t('My subscribes')}}</v-list-item-title>
+          <v-list-item-title>{{$t('My subscriptions')}}</v-list-item-title>
         </v-list-item-content>
       </v-list-item>
 

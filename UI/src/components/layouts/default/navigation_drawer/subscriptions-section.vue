@@ -4,12 +4,12 @@
       <v-container grid-list-md>
         <v-layout align-center>
           <v-flex shrink>
-            <span>{{$t('app.navigation-panel.areas.subscribes.title')}}</span>
+            <span>{{$t('app.navigation-panel.areas.subscriptions.title')}}</span>
           </v-flex>
           <v-flex mx-1>
             <v-tooltip top color="red">
               <template v-slot:activator="{ on }">
-                <v-icon  @click="goToSubscribes()" v-on="on">
+                <v-icon  @click="goToSubscriptions()" v-on="on">
                   fa-eye
                 </v-icon>
               </template>
@@ -20,13 +20,13 @@
       </v-container>
     </v-subheader>
     <v-list>
-      <v-tooltip color="red" top v-for="(subscribe, index) in subscribes" :key="index">
+      <v-tooltip color="red" top v-for="(subscription, index) in subscriptions" :key="index">
         <template v-slot:activator="{ on }">
           <v-list-item @click="" v-on="on">
             <v-list-item-avatar>
-              <img :src="`https://randomuser.me/api/portraits/men/${subscribe.picture}.jpg`" />
+              <img :src="`https://randomuser.me/api/portraits/men/${subscription.picture}.jpg`" />
             </v-list-item-avatar>
-            <v-list-item-title v-text="subscribe.name"></v-list-item-title>
+            <v-list-item-title v-text="subscription.name"></v-list-item-title>
           </v-list-item>
         </template>
         <v-layout>
@@ -34,7 +34,7 @@
             <span>{{ $t('Дней осталось: ') }}</span>
           </v-flex>
           <v-flex>
-            <span>{{ subscribe.daysLeft }}</span>
+            <span>{{ subscription.daysLeft }}</span>
           </v-flex>
         </v-layout>
       </v-tooltip>
@@ -47,8 +47,8 @@ import Vue from "vue";
 import { Component } from "vue-property-decorator";
 
 @Component({})
-export default class Subscribes extends Vue {
-  subscribes: any[] = [
+export default class Subscriptions extends Vue {
+  subscriptions: any[] = [
     { picture: 28, name: 'Kaper1', daysLeft: 10 },
     { picture: 38, name: 'Kaper2', daysLeft: 15 },
     { picture: 48, name: 'Kaper3', daysLeft: 2 },
@@ -56,8 +56,8 @@ export default class Subscribes extends Vue {
     { picture: 78, name: 'Kaper5', daysLeft: 7 },
   ];
 
-  goToSubscribes() {
-    this.$router.push('/subscribes');
+  goToSubscriptions() {
+    this.$router.push('/subscriptions');
   }
 }
 </script>

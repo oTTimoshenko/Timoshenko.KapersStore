@@ -26,7 +26,7 @@
         <v-divider insite></v-divider>
       </v-flex>
       <v-flex>
-        <kaper-subscribes-list :subscriptions="kaperDetails.subscriptions"></kaper-subscribes-list>
+        <kaper-subscriptions-list :subscriptions="kaperDetails.subscriptions"></kaper-subscriptions-list>
       </v-flex>
       <v-flex my-5>
         <v-divider insite></v-divider>
@@ -41,7 +41,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Prop, Component } from 'vue-property-decorator'
-import KaperSubscribesList from './kaper-details-subscribes-list.vue'
+import KaperSubscriptionsList from './kaper-details-subscriptions-list.vue'
 import CommentsTree from '@/components/layouts/default/comments/CommentsTree.vue'
 
 import { CartKaper, CartSubscription, CartState } from '@/components/layouts/default/cart/types';
@@ -49,7 +49,7 @@ import EventBus from '@/plugins/eventBus'
 
 @Component({
   components: {
-    KaperSubscribesList,
+    KaperSubscriptionsList,
     CommentsTree
   }
 })

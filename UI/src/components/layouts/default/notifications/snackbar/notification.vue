@@ -7,7 +7,7 @@
     <v-btn
       color="red"
       text
-      @click="continueSubscribe">
+      @click="continueSubscription">
       {{$t('Continue')}}
     </v-btn>
     <v-btn
@@ -27,9 +27,9 @@ import { Component, Prop } from 'vue-property-decorator';
 @Component({})
 export default class CartAvatar extends Vue {
   snackbarModel: boolean = true;
-  message: string = 'Your subscription for Kaper1:Subscribe1 is ending, do u want to continue it?';
+  message: string = 'Your subscription for Kaper1:Subscription1 is ending, do u want to continue it?';
 
-  continueSubscribe() {
+  continueSubscription() {
     this.$router.push('/kapers');
     this.snackbarModel = false;
   }

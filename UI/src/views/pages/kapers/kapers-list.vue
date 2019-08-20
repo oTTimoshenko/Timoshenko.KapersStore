@@ -33,7 +33,7 @@
             <v-flex>
               <v-layout>
                 <v-flex>
-                  <kaper-subscribes-list :subscriptions="kaper.subscriptions"></kaper-subscribes-list>
+                  <kaper-subscriptions-list :subscriptions="kaper.subscriptions"></kaper-subscriptions-list>
                 </v-flex>
               </v-layout>
             </v-flex>
@@ -49,14 +49,14 @@
 import Vue from 'vue'
 import { Prop, Component } from 'vue-property-decorator'
 
-import KaperSubscribesList from './kaper-subscribes-list.vue'
+import KaperSubscriptionsList from './kaper-subscriptions-list.vue'
 
 import { CartKaper, CartSubscription, CartState } from '@/components/layouts/default/cart/types';
 import EventBus from '@/plugins/eventBus'
 
 @Component({
   components: {
-    KaperSubscribesList
+    KaperSubscriptionsList
   }
 })
 export default class KapersList extends Vue {

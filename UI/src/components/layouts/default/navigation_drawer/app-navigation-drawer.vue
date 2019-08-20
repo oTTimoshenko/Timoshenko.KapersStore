@@ -4,7 +4,7 @@
 
       <treeview-section/>
 
-      <subscribes-section/>
+      <subscriptions-section/>
 
       <settings-section v-if="withSettings"/>
 
@@ -16,12 +16,12 @@
 import Vue from "vue";
 import { Component, Prop, Watch } from "vue-property-decorator";
 import TreeviewSection from './treeview-section.vue';
-import SubscribesSection from './subscribes-section.vue';
+import SubscriptionsSection from './subscriptions-section.vue';
 import SettingsSection from './settings-section.vue';
 
 @Component({
   components: {
-    TreeviewSection, SubscribesSection, SettingsSection
+    TreeviewSection, SubscriptionsSection, SettingsSection
   }
 })
 export default class AppNavigationDrawer extends Vue {
