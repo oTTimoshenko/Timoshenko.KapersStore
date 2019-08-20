@@ -57,14 +57,7 @@ import EventBus from '@/plugins/eventBus'
   }
 })
 export default class Cart extends Vue {
-  cart: CartState = new CartState([]);
-// new CartState([    new CartKaper(1, 'Kaper1', [  new CartSubscription(1, 'Subscription1', 110),
-//                                   new CartSubscription(2, 'Subscription2', 110),
-//                                   new CartSubscription(3, 'Subscription3', 110),  ]),
-//     new CartKaper(2, 'Kaper2', [  new CartSubscription(4, 'Subscription1', 110),
-//                                   new CartSubscription(5, 'Subscription2', 110)  ]),
-//     ]);
-    
+  cart: CartState = new CartState([]);  
 
   mounted() {
     this.reloadCart();

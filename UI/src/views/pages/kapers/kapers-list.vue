@@ -76,7 +76,6 @@ export default class KapersList extends Vue {
   }
 
   addKaperToCart(subscriptionId: number) {
-    debugger
     const kaper = this.kapers.find(k => k.subscriptions
                                     .find(s => s.id === subscriptionId));
 

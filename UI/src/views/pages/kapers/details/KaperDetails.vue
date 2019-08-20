@@ -80,8 +80,6 @@ export default class KapersDetails extends Vue {
   }
 
   addKaperToCart(subscriptionId: number) {
-    debugger
-
     const cartKaper = new CartKaper(this.kaperDetails.id, this.kaperDetails.name, this.kaperDetails.subscriptions.filter(s => s.id === subscriptionId).map(s => new CartSubscription(s.id, s.name, s.price)));
 
     EventBus.$emit('cart:item-added', cartKaper);
