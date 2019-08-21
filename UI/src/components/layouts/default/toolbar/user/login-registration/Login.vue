@@ -4,7 +4,7 @@
       <template v-slot:activator="{ on }">
         <v-btn color="primary" dark v-on="on">Open Dialog</v-btn>
       </template>
-      <login-form></login-form>
+      <login-form v-on:closeDialog="closeDialog()"></login-form>
     </v-dialog>
   </v-layout>
 </template>
@@ -21,6 +21,10 @@ import LoginForm from './login-form.vue';
 })
 export default class Login extends Vue {
   dialog: any = true;
+
+  closeDialog() {
+    this.dialog = false;
+  }
 }
 </script>
 

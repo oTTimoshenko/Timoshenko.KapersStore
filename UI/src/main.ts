@@ -6,11 +6,13 @@ import vuetify from './plugins/vuetify'
 import Vuetify from 'vuetify'
 import VueRouter from 'vue-router'
 import i18n from './i18n'
+import Vuelidate from 'vuelidate'
 
 Vue.config.productionTip = false
 
 Vue.use(VueRouter);
 Vue.use(Vuetify);
+Vue.use(Vuelidate);
 
 
 new Vue({

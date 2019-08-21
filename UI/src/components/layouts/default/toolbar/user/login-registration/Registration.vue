@@ -4,7 +4,7 @@
       <template v-slot:activator="{ on }">
         <v-btn color="primary" dark v-on="on">Open Dialog</v-btn>
       </template>
-      <registration-form></registration-form>
+      <registration-form v-on:closeDialog="closeDialog()"></registration-form>
     </v-dialog>
   </v-layout>
 </template>
@@ -21,6 +21,10 @@ import RegistrationForm from './registration-form.vue';
 })
 export default class Registration extends Vue {
   dialog: any = true;
+
+  closeDialog() {
+    this.dialog = false;
+  }
 }
 </script>
 

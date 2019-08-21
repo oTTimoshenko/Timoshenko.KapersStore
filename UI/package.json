@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@types/lodash": "^4.14.136",
+    "@types/vuelidate": "^0.7.6",
     "core-js": "^2.6.5",
     "vue": "^2.6.10",
     "vue-class-component": "^7.0.2",
@@ -17,6 +18,7 @@
     "vue-lodash": "^2.0.2",
     "vue-property-decorator": "^8.1.0",
     "vue-router": "^3.0.3",
+    "vuelidate": "^0.7.4",
     "vuetify": "^2.0.5",
     "vuex": "^3.0.1"
   },
