@@ -5,6 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="9.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\KapersStore.DataAccess\KapersStore.DataAccess.csproj" />
     <ProjectReference Include="..\KapersStore.Domain\KapersStore.Domain.csproj" />
     <ProjectReference Include="..\KapersStore.Infrastructure\KapersStore.Infrastructure.csproj" />
   </ItemGroup>
