@@ -6,7 +6,7 @@ using System.Text;
 
 namespace KapersStore.DataAccess
 {
-    public static class MappingConfigurations
+    public static class EntityMappingConfig
     {
         public static void BuildUser(this ModelBuilder modelBuilder)
         {

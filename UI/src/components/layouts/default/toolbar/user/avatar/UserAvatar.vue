@@ -19,7 +19,7 @@
         </v-list-item-content>
       </v-list-item>
 
-      <v-list-item @click="goToRoute('/login')">
+      <v-list-item @click="logout()">
         <v-list-item-icon>
           <v-icon>
             fa-telegram
@@ -41,6 +41,10 @@ import { Component, Prop, Watch } from "vue-property-decorator";
 export default class UserAvatar extends Vue {
   goToRoute(route: string) {
     this.$router.push(route);
+  }
+
+  logout() {
+    this.$store.dispatch('AUTH_LOGOUT').then(() => this.$router.push({name: 'home'}));
   }
 }
 </script>

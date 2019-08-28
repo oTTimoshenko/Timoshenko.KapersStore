@@ -1,6 +1,5 @@
 <template>
   <v-container ma-0 pa-0>
-    <v-card>
       <v-card-title>
         {{$t('Registration')}}
       </v-card-title>
@@ -35,7 +34,6 @@
           </v-btn>
         </v-layout>
       </v-card-actions>
-    </v-card>
   </v-container>
 </template>
 

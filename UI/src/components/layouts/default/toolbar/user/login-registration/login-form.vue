@@ -1,6 +1,5 @@
 <template>
   <v-container ma-0 pa-0>
-    <v-card>
       <v-card-title>
         {{$t('Login')}}
       </v-card-title>
@@ -8,21 +7,32 @@
       <v-card-text>
         <v-container grid-list-md>
           <v-layout column>
-            <v-text-field v-model="email"
-                          @input="$v.email.$touch()"
-                          @blur="$v.email.$touch()"
-                          :label="$t('Email')"
-                          :error-messages="emailErrors"
-                          required>
-            </v-text-field>
-
-            <v-text-field v-model="password"
-                          @input="$v.password.$touch()"
-                          @blur="$v.password.$touch()"
-                          :label="$t('Password')"
-                          :error-messages="passwordErrors"
-                          required>
-            </v-text-field>
+            <v-flex>
+              <v-text-field v-model="email"
+                            @input="$v.email.$touch()"
+                            @blur="$v.email.$touch()"
+                            :label="$t('Email')"
+                            :error-messages="emailErrors"
+                            required>
+              </v-text-field>
+            </v-flex>
+            <v-flex mb-3>
+              <v-text-field v-model="password"
+                            @input="$v.password.$touch()"
+                            @blur="$v.password.$touch()"
+                            :label="$t('Password')"
+                            :error-messages="passwordErrors"
+                            required>
+              </v-text-field>
+            </v-flex>
+            <v-flex>
+              <span class="red--text link-text">{{$t('Forgot password?')}}</span>
+            </v-flex>
+            <v-flex>
+              <router-link to="/registration" tag="div">
+                <span class="red--text link-text">{{$t('Create new account')}}</span>
+              </router-link>
+            </v-flex>
           </v-layout>
         </v-container>
       </v-card-text>
@@ -38,7 +48,6 @@
           </v-btn>
         </v-layout>
       </v-card-actions>
-    </v-card>
   </v-container>
 </template>
 
@@ -89,10 +98,10 @@ export default class LoginForm extends Vue {
   submit() {
     this.$v.$touch();
 
-    if(this.$v.$invalid) {
-      alert('Errors!')
-    } else {
-      alert('Okay!')
+    if(!this.$v.$invalid) {
+      debugger
+      this.$store.dispatch('AUTH_REQUEST', { login: this.email, password: this.password })
+                    .then(() => this.$router.push({name: 'home'}));
     }
   }
 
@@ -100,5 +109,7 @@ export default class LoginForm extends Vue {
 </script>
 
 <style lang="scss" scoped>
-
+.link-text:hover {
+  cursor: pointer;
+}
 </style>

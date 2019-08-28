@@ -9,6 +9,7 @@
 import Vue from 'vue';
 import { Component } from 'vue-property-decorator';
 import { DefaultLayout } from '@/components/layouts/default/index'
+import axios from 'axios';
 
 @Component({
   components: {
@@ -16,7 +17,18 @@ import { DefaultLayout } from '@/components/layouts/default/index'
   }
 })
 export default class App extends Vue {
+ created() {
 
+   axios.interceptors.response.use(undefined, error => {
+     return new Promise((resolve, reject) => {
+       if(error.status === 401 && error.config && !error.config.__isRetryRequest) {
+         this.$store.dispatch('AUTH_LOGOUT')
+       }
+
+       throw error;
+     })
+   })
+ }
 }
 
 </script>

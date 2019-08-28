@@ -1,6 +1,23 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import { notFoundPageName } from '@/components/layouts/default/constants'
+import store from '@/store';
+
+const ifNotAuthenticated = (to, from, next) => {
+  if (!store.getters.isAuthenticated) {
+    next()
+    return
+  }
+  next('/')
+}
+
+const ifAuthenticated = (to, from, next) => {
+  if (store.getters.isAuthenticated) {
+    next()
+    return
+  }
+  next('/login')
+}
 
 export default new VueRouter({
   mode: 'history',
@@ -14,7 +31,8 @@ export default new VueRouter({
     {
       path: '/kapers',
       name: 'kapers',
-      component: () => import('./views/pages/kapers/Kapers.vue')
+      component: () => import('./views/pages/kapers/Kapers.vue'),
+      beforeEnter: ifAuthenticated
     },
     {
       path: '/kapers/:kaperId/details',
