@@ -1,10 +1,8 @@
-﻿using KapersStore.ApplicationLogic.UserManagement;
+﻿using KapersStore.ApplicationLogic.KaperManagement;
+using KapersStore.ApplicationLogic.KaperManagement.Abstractions;
+using KapersStore.ApplicationLogic.UserManagement;
 using KapersStore.ApplicationLogic.UserManagement.Abstractions;
-using KapersStore.DataAccess;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace KapersStore.ApplicationLogic.ExtensionMethods
 {
@@ -15,11 +13,17 @@ namespace KapersStore.ApplicationLogic.ExtensionMethods
             services.AddDataContextDependencies();
 
             services.AddUserManagementDependencies();
+            services.AddKaperManagementDependencies();
         }
 
         public static void AddUserManagementDependencies(this IServiceCollection services)
         {
             services.AddScoped<IUserService, UserService>();
+        }
+
+        public static void AddKaperManagementDependencies(this IServiceCollection services)
+        {
+            services.AddScoped<IKaperService, KaperService>();
         }
 
         public static void AddDataContextDependencies(this IServiceCollection services)

@@ -4,7 +4,7 @@
 
       <treeview-section/>
 
-      <subscriptions-section/>
+      <subscriptions-section v-if="$store.getters.isAuthenticated"/>
 
       <settings-section v-if="withSettings"/>
 

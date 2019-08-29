@@ -44,6 +44,7 @@ import { Component, Prop, Watch } from "vue-property-decorator";
 import { validationMixin } from 'vuelidate';
 import { required, maxLength, minLength, email, sameAs } from 'vuelidate/lib/validators'
 import { isNullOrUndefined } from 'util';
+import apiService from '@/components/layouts/default/helpers/services/apiService'
 
 @Component({
   mixins: [validationMixin],
@@ -105,6 +106,14 @@ export default class RegistrationForm extends Vue {
     return errors;
   }
 
+  get registrationModel() {
+    return {
+      nickname: this.nickname,
+      email: this.email,
+      password: this.password
+    }
+  }
+
   closeDialog() {
     this.$emit('closeDialog');
   }
@@ -112,10 +121,8 @@ export default class RegistrationForm extends Vue {
   submit() {
     this.$v.$touch();
 
-    if(this.$v.$invalid)
-      alert('Errors')
-    else
-      alert('Okay')
+    if(!this.$v.$invalid)
+      apiService.post('users', 'registrate', this.registrationModel)
   }
 }
 </script>

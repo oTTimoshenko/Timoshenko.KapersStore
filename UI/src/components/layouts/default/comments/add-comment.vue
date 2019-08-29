@@ -7,7 +7,7 @@
                     :label="$t('New comment')"
                     :placeholder="$t('Put here your text...')"
                     rows="7"
-                    counter="250"
+                    counter="500"
                     color="red"
                     outlined
                     no-resize
@@ -40,7 +40,7 @@ export default class AddComment extends Vue {
   text: string = '';
 
   addComment() {
-    EventBus.$emit('comments:added', new KaperComment(0, 0, 'Static User Nickname', new Date().toLocaleString(), this.text));
+    EventBus.$emit('comments:added', { text: this.text, parentId: null});
     this.text = '';
   }
 }

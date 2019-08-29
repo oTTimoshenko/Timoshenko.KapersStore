@@ -10,6 +10,7 @@ import Vue from 'vue';
 import { Component } from 'vue-property-decorator';
 import { DefaultLayout } from '@/components/layouts/default/index'
 import axios from 'axios';
+import { notFoundPageName } from '@/components/layouts/default/constants'
 
 @Component({
   components: {
@@ -24,6 +25,9 @@ export default class App extends Vue {
        if(error.status === 401 && error.config && !error.config.__isRetryRequest) {
          this.$store.dispatch('AUTH_LOGOUT')
        }
+
+       if(error.status === 404)
+        this.$router.push({name: notFoundPageName});
 
        throw error;
      })

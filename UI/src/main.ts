@@ -16,7 +16,6 @@ Vue.prototype.$http = axios;
 Vue.prototype.apiService = apiService;
 
 const token = localStorage.getItem(constants.userToken);
-debugger
 if(token) axios.defaults.headers.common[constants.authorizationHeaderName] = token;
 
 Vue.use(VueRouter);

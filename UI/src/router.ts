@@ -31,8 +31,7 @@ export default new VueRouter({
     {
       path: '/kapers',
       name: 'kapers',
-      component: () => import('./views/pages/kapers/Kapers.vue'),
-      beforeEnter: ifAuthenticated
+      component: () => import('./views/pages/kapers/Kapers.vue')
     },
     {
       path: '/kapers/:kaperId/details',
