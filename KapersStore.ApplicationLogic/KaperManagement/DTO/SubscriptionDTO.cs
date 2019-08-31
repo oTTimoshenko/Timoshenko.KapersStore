@@ -9,5 +9,11 @@
         public int Days { get; set; }
 
         public int KaperId { get; set; }
+
+        public class AddToCartDTO
+        {
+            public int SubscriptionId { get; set; }
+            public int Count { get; set; }
+        }
     }
 }

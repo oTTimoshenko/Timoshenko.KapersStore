@@ -1,4 +1,5 @@
-﻿using System;
+﻿using KapersStore.Domain.CartManagement;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -12,5 +13,8 @@ namespace KapersStore.Domain.UserManagement
         public string Status { get; set; }
         public byte[] PasswordHash { get; set; }
         public byte[] PasswordSalt { get; set; }
+
+        public int CartId { get; set; }
+        public Cart Cart { get; set; }
     }
 }

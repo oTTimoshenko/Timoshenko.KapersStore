@@ -1,4 +1,5 @@
-﻿using KapersStore.Domain.KaperManagement;
+﻿using KapersStore.Domain.CartManagement;
+using KapersStore.Domain.KaperManagement;
 using KapersStore.Domain.UserManagement;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
@@ -96,13 +97,41 @@ namespace KapersStore.DataAccess
 
             userEntity.Property(entity => entity.Text).HasMaxLength(500);
             userEntity.Property(entity => entity.Text).IsRequired();
-            
+
             userEntity.Property(entity => entity.Date).IsRequired();
 
             userEntity.Property(entity => entity.UserId).IsRequired();
             userEntity.Property(entity => entity.KaperId).IsRequired();
 
             //userEntity.HasOne(x => x.Parent).WithMany(x => x.Children).OnDelete(DeleteBehavior.Cascade);
+        }
+
+        public static void BuildCart(this ModelBuilder modelBuilder)
+        {
+            var cartEntity = modelBuilder.Entity<Cart>();
+
+            cartEntity.HasKey(entity => entity.Id);
+
+            cartEntity.Property(entity => entity.UserId).IsRequired();
+        }
+
+        public static void BuildCartSubscription(this ModelBuilder modelBuilder)
+        {
+            var cartSubscription = modelBuilder.Entity<CartSubscription>();
+
+            cartSubscription.HasKey(entity => new { entity.CartId, entity.SubscriptionId });
+
+            cartSubscription
+                .HasOne(cs => cs.Cart)
+                .WithMany(css => css.CartSubscriptions)
+                .HasForeignKey(cs => cs.CartId);
+
+            cartSubscription
+                .HasOne(cs => cs.Subscription)
+                .WithMany(css => css.CartSubscriptions)
+                .HasForeignKey(cs => cs.SubscriptionId);
+
+            cartSubscription.Property(entity => entity.SubscriptionsCount).HasDefaultValue(1);
         }
     }
 }

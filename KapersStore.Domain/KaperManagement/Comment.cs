@@ -20,5 +20,10 @@ namespace KapersStore.Domain.KaperManagement
 
         public int KaperId { get; set; }
         public Kaper Kaper { get; set; }
+
+        public Comment()
+        {
+            Children = new List<Comment>();
+        }
     }
 }

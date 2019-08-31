@@ -3,6 +3,7 @@ using KapersStore.ApplicationLogic.KaperManagement.Abstractions;
 using KapersStore.ApplicationLogic.KaperManagement.DTO;
 using KapersStore.DataAccess;
 using KapersStore.Domain.KaperManagement;
+using KapersStore.Infrastructure.ExtensionMethods;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -36,13 +37,13 @@ namespace KapersStore.ApplicationLogic.KaperManagement
             mapper.Map<List<KaperDTO>>(dataContext.Kapers.ToList());
 
         public KaperDTO GetById(int id) =>
-            mapper.Map<KaperDTO>(dataContext.Kapers.Find(id));
+            mapper.Map<KaperDTO>(dataContext.Kapers.Get(id));
 
         //public List<SubscriptionDTO> GetAllSubscriptions() =>
         //    mapper.Map<List<SubscriptionDTO>>(dataContext.Subscriptions.ToList());
 
         public SubscriptionDTO GetSubscriptionById(int id) =>
-            mapper.Map<SubscriptionDTO>(dataContext.Subscriptions.Find(id));
+            mapper.Map<SubscriptionDTO>(dataContext.Subscriptions.Get(id));
 
         public List<SubscriptionDTO> GetSubscriptions(int kaperId) =>
             GetById(kaperId).Subscriptions;

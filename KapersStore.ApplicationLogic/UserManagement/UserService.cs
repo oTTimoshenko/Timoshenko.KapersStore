@@ -4,6 +4,7 @@ using KapersStore.ApplicationLogic.UserManagement.DTO;
 using KapersStore.DataAccess;
 using KapersStore.Domain.UserManagement;
 using KapersStore.Infrastructure.Exceptions;
+using KapersStore.Infrastructure.ExtensionMethods;
 using System;
 using System.Linq;
 using System.Text;
@@ -57,7 +58,7 @@ namespace KapersStore.ApplicationLogic.UserManagement
         }
 
         public UserDTO GetById(int id) =>
-            mapper.Map<UserDTO>(dataContext.Users.Find(id));
+            mapper.Map<UserDTO>(dataContext.Users.Get(id));
 
 
         private User GetUserByEmail(string email) =>

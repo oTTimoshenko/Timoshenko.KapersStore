@@ -1,6 +1,5 @@
-﻿using System;
+﻿using KapersStore.Domain.CartManagement;
 using System.Collections.Generic;
-using System.Text;
 
 namespace KapersStore.Domain.KaperManagement
 {
@@ -14,5 +13,12 @@ namespace KapersStore.Domain.KaperManagement
 
         public int KaperId { get; set; }
         public Kaper Kaper { get; set; }
+
+        public List<CartSubscription> CartSubscriptions { get; set; }
+
+        public Subscription()
+        {
+            CartSubscriptions = new List<CartSubscription>();
+        }
     }
 }

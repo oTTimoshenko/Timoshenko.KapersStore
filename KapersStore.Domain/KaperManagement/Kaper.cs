@@ -14,5 +14,11 @@ namespace KapersStore.Domain.KaperManagement
 
         public List<Subscription> Subscriptions { get; set; }
         public List<Comment> Comments { get; set; }
+
+        public Kaper()
+        {
+            Subscriptions = new List<Subscription>();
+            Comments = new List<Comment>();
+        }
     }
 }
