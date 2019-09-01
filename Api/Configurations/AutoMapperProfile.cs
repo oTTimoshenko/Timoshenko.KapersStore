@@ -1,6 +1,8 @@
-﻿using Api.KaperManagement.Models;
+﻿using Api.CartManagement.Models;
+using Api.KaperManagement.Models;
 using Api.UserManagement.Models;
 using AutoMapper;
+using KapersStore.ApplicationLogic.CartManagement.DTO;
 using KapersStore.ApplicationLogic.KaperManagement.DTO;
 using KapersStore.ApplicationLogic.UserManagement.DTO;
 using System;
@@ -8,7 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Api.Helpers
+namespace Api.Configurations
 {
     public class AutoMapperProfile: Profile
     {
@@ -25,6 +27,8 @@ namespace Api.Helpers
                 .ForMember(dest => dest.UserNickname, opt => opt.MapFrom(src => src.User.Nickname));
 
             CreateMap<CommentCreateDTO, CommentCreateModel>().ReverseMap().MaxDepth(1);
+            CreateMap<CartDTO, CartModel>().ReverseMap();
+            CreateMap<SubscriptionDTO.AddToCartDTO, CartModel.SubscriptionModel>().ReverseMap();
         }
     }
 }

@@ -12,6 +12,6 @@ namespace KapersStore.ApplicationLogic.CartManagement.Abstractions
         void AddSubscriptionToUserCart(int userId, int subscriptionId);
         void RemoveSubscriptionFromUserCart(int userId, int subscriptionId, RemoveSubscriptionMode removeMode);
         void RemoveKaperSubscriptionsFromUserCart(int userId, int kaperId);
-        void RemoveCart(int id);
+        void RemoveUserCart(int userId);
     }
 }

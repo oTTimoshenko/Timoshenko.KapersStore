@@ -1,4 +1,6 @@
-﻿using KapersStore.ApplicationLogic.KaperManagement;
+﻿using KapersStore.ApplicationLogic.CartManagement;
+using KapersStore.ApplicationLogic.CartManagement.Abstractions;
+using KapersStore.ApplicationLogic.KaperManagement;
 using KapersStore.ApplicationLogic.KaperManagement.Abstractions;
 using KapersStore.ApplicationLogic.UserManagement;
 using KapersStore.ApplicationLogic.UserManagement.Abstractions;
@@ -24,6 +26,11 @@ namespace KapersStore.ApplicationLogic.ExtensionMethods
         public static void AddKaperManagementDependencies(this IServiceCollection services)
         {
             services.AddScoped<IKaperService, KaperService>();
+        }
+
+        public static void AddCartManagementDependencies(this IServiceCollection services)
+        {
+            services.AddScoped<ICartService, CartService>();
         }
 
         public static void AddDataContextDependencies(this IServiceCollection services)

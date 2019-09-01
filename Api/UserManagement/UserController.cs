@@ -1,4 +1,4 @@
-﻿using Api.Helpers;
+﻿using Api.Configurations;
 using Api.UserManagement.Models;
 using AutoMapper;
 using KapersStore.ApplicationLogic.UserManagement.Abstractions;

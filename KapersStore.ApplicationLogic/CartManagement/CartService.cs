@@ -63,9 +63,9 @@ namespace KapersStore.ApplicationLogic.CartManagement
             dataContext.SaveChanges();
         }
 
-        public void RemoveCart(int id)
+        public void RemoveUserCart(int userId)
         {
-            var cart = dataContext.Carts.Get(id);
+            var cart = dataContext.Users.Get(userId).Cart;
 
             dataContext.Carts.Remove(cart);
             dataContext.SaveChanges();

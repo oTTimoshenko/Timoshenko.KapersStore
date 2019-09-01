@@ -1,4 +1,4 @@
-﻿using Api.Helpers;
+﻿using Api.Configurations;
 using KapersStore.ApplicationLogic.ExtensionMethods;
 using KapersStore.ApplicationLogic.UserManagement.Abstractions;
 using Microsoft.AspNetCore.Authentication.JwtBearer;

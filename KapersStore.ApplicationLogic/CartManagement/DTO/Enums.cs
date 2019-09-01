@@ -6,13 +6,13 @@ namespace KapersStore.ApplicationLogic.CartManagement.DTO
 {
     public enum RemoveSubscriptionMode
     {
-        MinusOneItem,
-        ItemCompletely
+        MinusOneItem = 0,
+        ItemCompletely = 1
     }
 
     public enum AddRemoveOption
     {
-        Add,
-        Remove
+        Add = 0,
+        Remove = 1
     }
 }
