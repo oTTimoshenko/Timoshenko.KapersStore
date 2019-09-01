@@ -1,5 +1,6 @@
 ﻿using KapersStore.Domain.CartManagement;
 using KapersStore.Domain.KaperManagement;
+using KapersStore.Domain.PurchaseManagement;
 using KapersStore.Domain.UserManagement;
 using Microsoft.EntityFrameworkCore;
 
@@ -19,6 +20,8 @@ namespace KapersStore.DataAccess
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Cart> Carts { get; set; }
         public DbSet<CartSubscription> CartSubscriptions{ get; set; }
+        public DbSet<Purchase> Purchases { get; set; }
+        public DbSet<PurchaseSubscription> PurchaseSubscriptions { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -28,6 +31,9 @@ namespace KapersStore.DataAccess
             modelBuilder.BuildComment();
             modelBuilder.BuildCart();
             modelBuilder.BuildCartSubscription();
+            modelBuilder.BuildPurchase();
+            modelBuilder.BuildPurchaseSubscription();
+
             base.OnModelCreating(modelBuilder);
         }
     }

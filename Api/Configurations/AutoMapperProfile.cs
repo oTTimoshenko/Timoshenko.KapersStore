@@ -28,7 +28,8 @@ namespace Api.Configurations
 
             CreateMap<CommentCreateDTO, CommentCreateModel>().ReverseMap().MaxDepth(1);
             CreateMap<CartDTO, CartModel>().ReverseMap();
-            CreateMap<SubscriptionDTO.AddToCartDTO, CartModel.SubscriptionModel>().ReverseMap();
+            CreateMap<CartKaperDTO, CartKaperModel>().ReverseMap();
+            CreateMap<CartSubscriptionDTO, CartSubscriptionModel>().ReverseMap();
         }
     }
 }

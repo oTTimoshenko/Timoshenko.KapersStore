@@ -31,7 +31,7 @@ namespace KapersStore.ApplicationLogic.CartManagement
             if (cart is null)
                 CreateCart(new CartCreateDTO { UserId = userId });
 
-            return mapper.Map<CartDTO>(cart);
+            return CartDTO.ComposeCartDTO(cart);
         }
 
         public void AddSubscriptionToUserCart(int userId, int subscriptionId) =>

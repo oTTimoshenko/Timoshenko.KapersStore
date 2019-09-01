@@ -1,4 +1,5 @@
 ﻿using KapersStore.Domain.CartManagement;
+using KapersStore.Domain.PurchaseManagement;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -16,5 +17,12 @@ namespace KapersStore.Domain.UserManagement
 
         public int CartId { get; set; }
         public Cart Cart { get; set; }
+
+        public List<Purchase> Purchases{ get; set; }
+
+        public User()
+        {
+            Purchases = new List<Purchase>();
+        }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using KapersStore.Domain.CartManagement;
 using KapersStore.Domain.KaperManagement;
+using KapersStore.Domain.PurchaseManagement;
 using KapersStore.Domain.UserManagement;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
@@ -113,6 +114,7 @@ namespace KapersStore.DataAccess
             cartEntity.HasKey(entity => entity.Id);
 
             cartEntity.Property(entity => entity.UserId).IsRequired();
+            cartEntity.Ignore(entity => entity.TotalPrice);
         }
 
         public static void BuildCartSubscription(this ModelBuilder modelBuilder)
@@ -132,6 +134,36 @@ namespace KapersStore.DataAccess
                 .HasForeignKey(cs => cs.SubscriptionId);
 
             cartSubscription.Property(entity => entity.SubscriptionsCount).HasDefaultValue(1);
+        }
+
+        public static void BuildPurchase(this ModelBuilder modelBuilder)
+        {
+            var purchaseEntity = modelBuilder.Entity<Purchase>();
+
+            purchaseEntity.HasKey(entity => entity.Id);
+
+            purchaseEntity.Property(entity => entity.UserId).IsRequired();
+            purchaseEntity.Property(entity => entity.TotalPrice).IsRequired();
+        }
+
+        public static void BuildPurchaseSubscription(this ModelBuilder modelBuilder)
+        {
+            var purchaseSubscription = modelBuilder.Entity<PurchaseSubscription>();
+
+            purchaseSubscription.HasKey(entity => new { entity.PurchaseId, entity.SubscriptionId });
+
+            purchaseSubscription
+                .HasOne(cs => cs.Purchase)
+                .WithMany(css => css.PurchaseSubscriptions)
+                .HasForeignKey(cs => cs.PurchaseId);
+
+            purchaseSubscription
+                .HasOne(cs => cs.Subscription)
+                .WithMany(css => css.PurchaseSubscriptions)
+                .HasForeignKey(cs => cs.SubscriptionId);
+
+            purchaseSubscription.Property(entity => entity.SubscriptionCount).IsRequired();
+            purchaseSubscription.Property(entity => entity.SubscriptionPrice).IsRequired();
         }
     }
 }
