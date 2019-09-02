@@ -19,7 +19,7 @@ namespace KapersStore.ApplicationLogic.Configurations
             CreateMap<KaperDTO, Kaper>().ReverseMap().MaxDepth(3);
             CreateMap<SubscriptionDTO, Subscription>().ReverseMap().MaxDepth(3);
             CreateMap<CommentDTO, Comment>().ReverseMap().MaxDepth(3);
-            CreateMap<CartDTO, Cart>().ReverseMap()
+            CreateMap<CartDTO, Cart>().ReverseMap();
         }
     }
 }
