@@ -9,7 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace KapersStore.ApplicationLogic.Helpers
+namespace KapersStore.ApplicationLogic.Configurations
 {
     public class AutoMapperProfile: Profile
     {
@@ -19,7 +19,7 @@ namespace KapersStore.ApplicationLogic.Helpers
             CreateMap<KaperDTO, Kaper>().ReverseMap().MaxDepth(3);
             CreateMap<SubscriptionDTO, Subscription>().ReverseMap().MaxDepth(3);
             CreateMap<CommentDTO, Comment>().ReverseMap().MaxDepth(3);
-            CreateMap<CartDTO, Cart>().ReverseMap();
+            CreateMap<CartDTO, Cart>().ReverseMap()
         }
     }
 }

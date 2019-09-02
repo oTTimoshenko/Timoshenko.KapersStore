@@ -36,6 +36,9 @@ namespace Api.UserManagement
         [HttpPost("authenticate")]
         public IActionResult Authenticate([FromBody]UserAuthenticateModel userModel)
         {
+            if (userModel is null)
+                return BadRequest();
+
             var user = userService.Authenticate(userModel.Login, userModel.Password);
 
             if (user is null)
@@ -70,6 +73,9 @@ namespace Api.UserManagement
         [HttpPost("registrate")]
         public IActionResult Registrate([FromBody]UserRegistrateModel userRegistrateModel)
         {
+            if (userRegistrateModel is null)
+                return BadRequest();
+
             var userRegistrateDto = mapper.Map<UserRegistrateDTO>(userRegistrateModel);
             try
             {
