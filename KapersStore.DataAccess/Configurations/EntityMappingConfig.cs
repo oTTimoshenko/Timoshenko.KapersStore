@@ -1,5 +1,6 @@
 ﻿using KapersStore.Domain.CartManagement;
 using KapersStore.Domain.KaperManagement;
+using KapersStore.Domain.MailManagement;
 using KapersStore.Domain.PurchaseManagement;
 using KapersStore.Domain.UserManagement;
 using Microsoft.EntityFrameworkCore;
@@ -164,6 +165,36 @@ namespace KapersStore.DataAccess
 
             purchaseSubscription.Property(entity => entity.SubscriptionCount).IsRequired();
             purchaseSubscription.Property(entity => entity.SubscriptionPrice).IsRequired();
+        }
+
+        public static void BuildMail(this ModelBuilder modelBuilder)
+        {
+            var mail = modelBuilder.Entity<Mail>();
+
+            mail.HasKey(entity => entity.Id);
+
+            mail.Property(entity => entity.Subject).HasMaxLength(100).IsRequired();
+            mail.Property(entity => entity.Body).HasMaxLength(700).IsRequired();
+            mail.Property(entity => entity.SubscriptionId).IsRequired();
+        }
+
+        public static void BuildMailUser(this ModelBuilder modelBuilder)
+        {
+            var mailUser = modelBuilder.Entity<MailUser>();
+
+            mailUser.HasKey(entity => new { entity.MailId, entity.UserId });
+
+            mailUser
+                .HasOne(cs => cs.Mail)
+                .WithMany(css => css.MailUsers)
+                .HasForeignKey(cs => cs.MailId);
+
+            mailUser
+                .HasOne(cs => cs.User)
+                .WithMany(css => css.MailUsers)
+                .HasForeignKey(cs => cs.UserId);
+
+            mailUser.Property(entity => entity.IsSent).HasDefaultValue(false).IsRequired();
         }
     }
 }
