@@ -1,4 +1,5 @@
-﻿using Api.CartManagement.Models;
+﻿using Api.Abstractions;
+using Api.CartManagement.Models;
 using AutoMapper;
 using KapersStore.ApplicationLogic.CartManagement.Abstractions;
 using KapersStore.ApplicationLogic.CartManagement.DTO;
@@ -10,8 +11,7 @@ namespace Api.CartManagement
 {
     [Route("api/carts/user")]
     [Authorize]
-    [ApiController]
-    public class CartController : ControllerBase
+    public class CartController : BaseController
     {
         private readonly ICartService cartService;
         private readonly IMapper mapper;

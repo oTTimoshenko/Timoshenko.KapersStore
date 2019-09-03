@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Api.Abstractions;
 using Api.PurchaseManagement.Models;
 using AutoMapper;
 using KapersStore.ApplicationLogic.PurchaseManagement.Abstractions;
@@ -13,9 +14,8 @@ using Microsoft.AspNetCore.Mvc;
 namespace Api.PurchaseManagement
 {
     [Route("api/purchases")]
-    [ApiController]
     [Authorize]
-    public class PurchaseController : ControllerBase
+    public class PurchaseController : BaseController
     {
         IPurchaseService purchaseService;
         IMapper mapper;

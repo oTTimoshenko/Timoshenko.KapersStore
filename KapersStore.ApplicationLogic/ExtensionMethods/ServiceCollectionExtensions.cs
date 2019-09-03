@@ -17,8 +17,6 @@ namespace KapersStore.ApplicationLogic.ExtensionMethods
     {
         public static void AddAppDependencies(this IServiceCollection services)
         {
-            services.AddDataContextDependencies();
-
             services.AddUserManagementDependencies();
             services.AddKaperManagementDependencies();
             services.AddMailManagementDependencies();
@@ -50,11 +48,6 @@ namespace KapersStore.ApplicationLogic.ExtensionMethods
         public static void AddPurchaseManagementDependencies(this IServiceCollection services)
         {
             services.AddScoped<IPurchaseService, PurchaseService>();
-        }
-
-        public static void AddDataContextDependencies(this IServiceCollection services)
-        {
-            //services.AddScoped<DataContext>();
         }
     }
 }

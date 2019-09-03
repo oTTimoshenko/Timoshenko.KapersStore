@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Api.Abstractions;
 using Api.MailManagement.Models;
 using AutoMapper;
 using KapersStore.ApplicationLogic.MailManagement.Abstractions;
@@ -14,9 +15,8 @@ using Microsoft.AspNetCore.Mvc;
 namespace Api.MailManagement
 {
     [Route("api/mails")]
-    [ApiController]
     [Authorize]
-    public class MailController : ControllerBase
+    public class MailController : BaseController
     {
         private readonly IMailService mailService;
         private readonly IMapper mapper;

@@ -1,5 +1,6 @@
 ﻿using KapersStore.Domain.CartManagement;
 using KapersStore.Domain.PurchaseManagement;
+using KapersStore.Infrastructure.Helpers.LocalizationService;
 using System.Collections.Generic;
 
 namespace KapersStore.Domain.KaperManagement
@@ -8,7 +9,8 @@ namespace KapersStore.Domain.KaperManagement
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public string Description { get; set; }
+        public string DescriptionRU { get; set; }
+        public string DescriptionUA { get; set; }
         public decimal Price { get; set; }
         public int Days { get; set; }
 
@@ -17,6 +19,8 @@ namespace KapersStore.Domain.KaperManagement
 
         public List<CartSubscription> CartSubscriptions { get; set; }
         public List<PurchaseSubscription> PurchaseSubscriptions { get; set; }
+
+        public string Description => LocalizationState.Locale == Locale.RU ? DescriptionRU : DescriptionUA;
 
         public Subscription()
         {

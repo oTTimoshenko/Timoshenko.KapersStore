@@ -13,13 +13,13 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
 using System.Text;
+using Api.Abstractions;
 
 namespace Api.UserManagement
 {
     [Authorize]
-    [ApiController]
     [Route("api/users")]
-    public class UserController : ControllerBase
+    public class UserController : BaseController
     {
         private readonly IUserService userService;
         private readonly IMapper mapper;

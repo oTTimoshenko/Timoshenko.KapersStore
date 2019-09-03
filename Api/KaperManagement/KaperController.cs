@@ -6,13 +6,14 @@ using KapersStore.Infrastructure.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using Api.Helpers.Filters;
+using Api.Abstractions;
 
 namespace Api.KaperManagement
 {
     [Route("api/kapers")]
     [AllowAnonymous]
-    [ApiController]
-    public class KaperController : ControllerBase
+    public class KaperController : BaseController
     {
         private readonly IKaperService kaperService;
         private readonly IMapper mapper;
