@@ -9,6 +9,6 @@ namespace KapersStore.ApplicationLogic.MailManagement.DTO
         public int SubscriptionId { get; set; }
         public string Subject { get; set; }
         public string Body { get; set; }
-        public IEnumerable<string> UsersEmails { get; set; }
+        public List<string> UsersEmails { get; set; }
     }
 }

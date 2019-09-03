@@ -7,7 +7,7 @@ namespace KapersStore.ApplicationLogic.MailManagement.Abstractions
 {
     public interface IMailService
     {
-        void SendEmailToUsers(MailSendDTO sendDto);
+        void SendMailToUsers(MailSendDTO sendDto);
         IEnumerable<MailDTO> GetUserMails(int userId);
         IEnumerable<MailDTO> GetAllMails();
         IEnumerable<MailDTO> GetMailsByDate(DateTime date);
