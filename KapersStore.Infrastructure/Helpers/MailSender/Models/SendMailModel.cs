@@ -22,7 +22,7 @@ namespace KapersStore.Infrastructure.Helpers.MailSender.Models
         public bool UseSsl { get; set; } = false;
     }
 
-    public class User
+    public class MailUser
     {
         public string Name { get; set; }
         public string Email { get; set; }

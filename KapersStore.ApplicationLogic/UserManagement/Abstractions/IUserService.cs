@@ -1,4 +1,5 @@
 ﻿using KapersStore.ApplicationLogic.UserManagement.DTO;
+using KapersStore.Infrastructure.Helpers.MailSender.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -10,5 +11,6 @@ namespace KapersStore.ApplicationLogic.UserManagement.Abstractions
         UserDTO Authenticate(string email, string password);
         void Registrate(UserRegistrateDTO user);
         UserDTO GetById(int id);
+        void RequestResetPasswordMail(string email);
     }
 }

@@ -13,12 +13,12 @@ namespace KapersStore.Infrastructure.Helpers.MailSender
 {
     public class MailKitSender : IMailSender
     {
-        private readonly User userFrom;
+        private readonly MailUser userFrom;
         private readonly MailClientConfiguration clientConfig;
 
         public MailKitSender()
         {
-            userFrom = (User) ConfigurationManager.GetSection("MailUser");
+            userFrom = (MailUser) ConfigurationManager.GetSection("MailUser");
             clientConfig = (MailClientConfiguration) ConfigurationManager.GetSection("MailClient");
         }
 

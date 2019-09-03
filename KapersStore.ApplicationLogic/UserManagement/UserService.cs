@@ -5,7 +5,10 @@ using KapersStore.DataAccess;
 using KapersStore.Domain.UserManagement;
 using KapersStore.Infrastructure.Exceptions;
 using KapersStore.Infrastructure.ExtensionMethods;
+using KapersStore.Infrastructure.Helpers.MailSender;
+using KapersStore.Infrastructure.Helpers.MailSender.Models;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
@@ -15,11 +18,13 @@ namespace KapersStore.ApplicationLogic.UserManagement
     {
         private readonly DataContext dataContext;
         private readonly IMapper mapper;
+        private readonly IMailSender mailSender;
 
-        public UserService(DataContext dataContext, IMapper mapper)
+        public UserService(DataContext dataContext, IMapper mapper, IMailSender mailSender)
         {
             this.dataContext = dataContext;
             this.mapper = mapper;
+            this.mailSender = mailSender;
         }
 
         public UserDTO Authenticate(string email, string password)
@@ -92,6 +97,27 @@ namespace KapersStore.ApplicationLogic.UserManagement
             }
 
             return true;
+        }
+
+        public void RequestResetPasswordMail(string email)
+        {
+            throw new NotImplementedException();
+        }
+
+        private SendResult SendResetPasswordMail(string email, string resetUrl)
+        {
+            var sendModel = new SendMailModel
+            {
+                EmailsToSend = new List<string>() { email },
+                Mail = new Mail
+                {
+                    Subject = "Reset Password On Kapers Store",
+                    Body = $"Hi, click here <a>{resetUrl}</a> to reset ur password",
+                    IsHtml = true
+                }
+            };
+
+            return mailSender.Send(sendModel);
         }
     }
 }

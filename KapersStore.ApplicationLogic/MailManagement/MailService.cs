@@ -73,7 +73,7 @@ namespace KapersStore.ApplicationLogic.MailManagement
 
             dataContext.Mails.Add(mail);
 
-            var mailUsers = users.Select(user => new MailUser
+            var mailUsers = users.Select(user => new Domain.MailManagement.MailUser
             {
                 User = user,
                 IsSent = isSent,

@@ -16,6 +16,9 @@ namespace KapersStore.DataAccess
 
             userEntity.HasKey(entity => entity.Id);
 
+            userEntity.Property(entity => entity.Code).HasMaxLength(10);
+            userEntity.Property(entity => entity.Code).IsRequired();
+
             userEntity.Property(entity => entity.Nickname).HasMaxLength(18);
             userEntity.Property(entity => entity.Nickname).IsRequired();
 
