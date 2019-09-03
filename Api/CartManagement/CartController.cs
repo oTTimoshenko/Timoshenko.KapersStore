@@ -27,7 +27,7 @@ namespace Api.CartManagement
             Ok(mapper.Map<CartModel>(cartService.GetUserCart(userId)));
 
         [HttpPost("addSubscription")]
-        public IActionResult AddSubscriptionToUserCart(AddSubscriptionModel addModel)
+        public IActionResult AddSubscriptionToUserCart([FromBody]AddSubscriptionModel addModel)
         {
             cartService.AddSubscriptionToUserCart(addModel.UserId, addModel.SubscriptionId);
 
@@ -35,7 +35,7 @@ namespace Api.CartManagement
         }
 
         [HttpPost("removeSubscription")]
-        public IActionResult RemoveSubscriptionFromUserCart(RemoveSubscriptionModel removeModel)
+        public IActionResult RemoveSubscriptionFromUserCart([FromBody]RemoveSubscriptionModel removeModel)
         {
             if (removeModel is null)
                 return BadRequest();
@@ -47,7 +47,7 @@ namespace Api.CartManagement
         }
 
         [HttpPost("removeKaperSubscriptions")]
-        public IActionResult RemoveKaperSubscriptionsFromUserCart(RemoveKaperSubscriptionsModel removeModel)
+        public IActionResult RemoveKaperSubscriptionsFromUserCart([FromBody]RemoveKaperSubscriptionsModel removeModel)
         {
             if (removeModel is null)
                 return BadRequest();
@@ -58,7 +58,7 @@ namespace Api.CartManagement
         }
 
         [HttpPost("remove")]
-        public IActionResult RemoveUserCart(IdModel userIdModel)
+        public IActionResult RemoveUserCart([FromBody]IdModel userIdModel)
         {
             if (userIdModel is null)
                 return BadRequest();

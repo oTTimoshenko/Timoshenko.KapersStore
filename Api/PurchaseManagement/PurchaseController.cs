@@ -28,7 +28,7 @@ namespace Api.PurchaseManagement
         }
 
         [HttpPost("create")]
-        public IActionResult Create(PurchaseCreateModel createModel)
+        public IActionResult Create([FromBody]PurchaseCreateModel createModel)
         { 
             var createdPurchase = purchaseService.Create(mapper.Map<PurchaseCreateDTO>(createModel));
 

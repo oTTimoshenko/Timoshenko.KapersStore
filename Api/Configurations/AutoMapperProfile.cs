@@ -11,6 +11,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Api.MailManagement.Models;
+using KapersStore.ApplicationLogic.MailManagement.DTO;
 
 namespace Api.Configurations
 {
@@ -36,6 +38,11 @@ namespace Api.Configurations
             CreateMap<PurchaseDTO, PurchaseModel>().ReverseMap();
             CreateMap<PurchaseCreateDTO, PurchaseCreateModel>().ReverseMap();
             CreateMap<PurchaseSubscriptionDTO, PurchaseSubscriptionModel>().ReverseMap();
+
+            CreateMap<MailDTO, MailModel>().ReverseMap();
+            CreateMap<MailSendDTO, MailSendModel>().ReverseMap();
+            CreateMap<MailSubscriptionDTO, MailSendModel>().ReverseMap();
+            CreateMap<MailUserDTO, MailUserModel>().ReverseMap();
         }
     }
 }

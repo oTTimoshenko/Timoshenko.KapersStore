@@ -65,7 +65,7 @@ namespace Api.KaperManagement
         }
 
         [HttpPost("addComment")]
-        public IActionResult AddComment(CommentCreateModel comment)
+        public IActionResult AddComment([FromBody]CommentCreateModel comment)
         {
             if (comment is null)
                 return BadRequest();
@@ -78,7 +78,7 @@ namespace Api.KaperManagement
         }
 
         [HttpPost("removeComment")]
-        public IActionResult RemoveComment(IdModel commentId)
+        public IActionResult RemoveComment([FromBody]IdModel commentId)
         {
             if (commentId is null)
                 return BadRequest();
