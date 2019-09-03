@@ -23,6 +23,7 @@ namespace KapersStore.ApplicationLogic.ExtensionMethods
             services.AddKaperManagementDependencies();
             services.AddMailManagementDependencies();
             services.AddPurchaseManagementDependencies();
+            services.AddCartManagementDependencies();
         }
 
         public static void AddUserManagementDependencies(this IServiceCollection services)
