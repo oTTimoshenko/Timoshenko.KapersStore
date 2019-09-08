@@ -11,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using KapersStore.Infrastructure.Helpers.PasswordGenerator;
 
 namespace KapersStore.ApplicationLogic.UserManagement
 {
@@ -99,9 +100,29 @@ namespace KapersStore.ApplicationLogic.UserManagement
             return true;
         }
 
+        public void ResetPassword(string userCode, string newPassword)
+        {
+            var user = dataContext.Users.FirstOrDefault(u => u.Code.Equals(userCode));
+
+            if (user is null) throw new ArgumentException("Something went wrong");
+
+            CreatePasswordHash(newPassword, out byte[] passwordHash, out byte[] passwordSalt);
+
+            user.PasswordHash = passwordHash;
+            user.PasswordSalt = passwordSalt;
+
+            user.Code = PasswordGenerator.Generate(10, 0);
+
+            dataContext.SaveChanges();
+        }
+
         public void RequestResetPasswordMail(string email)
         {
-            throw new NotImplementedException();
+            var user = GetUserByEmail(email);
+
+            string resetUrl = $"localhost/resetPageUrl?token={user?.Code ?? "empty"}";
+
+            SendResetPasswordMail(email, resetUrl);
         }
 
         private SendResult SendResetPasswordMail(string email, string resetUrl)
@@ -109,10 +130,10 @@ namespace KapersStore.ApplicationLogic.UserManagement
             var sendModel = new SendMailModel
             {
                 EmailsToSend = new List<string>() { email },
-                Mail = new Mail
+                Mail = new Mail // TODO: Get the data from app.settings
                 {
                     Subject = "Reset Password On Kapers Store",
-                    Body = $"Hi, click here <a>{resetUrl}</a> to reset ur password",
+                    Body = $"Hi, click <a href=\"{resetUrl}\">here</a> to reset ur password",
                     IsHtml = true
                 }
             };
