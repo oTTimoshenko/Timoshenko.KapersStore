@@ -7,10 +7,11 @@
 <script lang="ts">
 
 import Vue from 'vue';
-import { Component } from 'vue-property-decorator';
+import { Component, Watch } from 'vue-property-decorator';
 import { DefaultLayout } from '@/components/layouts/default/index'
 import axios from 'axios';
 import { notFoundPageName } from '@/components/layouts/default/constants'
+import constants from './components/layouts/default/helpers/constants/constants';
 
 @Component({
   components: {
@@ -32,6 +33,11 @@ export default class App extends Vue {
        throw error;
      })
    })
+ }
+
+ @Watch('$i18n.locale', { deep: true })
+ private onLocaleChanged(newValue: string) {
+   axios.defaults.headers.common[constants.locale] = newValue.toUpperCase();
  }
 }
 

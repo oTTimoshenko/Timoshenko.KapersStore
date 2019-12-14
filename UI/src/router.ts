@@ -69,6 +69,21 @@ export default new VueRouter({
       component: () => import('./components/layouts/default/toolbar/user/login-registration/Registration.vue')
     },
     {
+      path: '/password/request-reset',
+      name: 'passwordRequestReset',
+      component: () => import('./components/layouts/default/toolbar/user/login-registration/ForgotPassword.vue')
+    },
+    {
+      path: '/password/reset/:email/:code',
+      name: 'passwordReset',
+      component: () => import('./components/layouts/default/toolbar/user/login-registration/ResetPassword.vue')
+    },
+    {
+      path: '/user-confirmation/:email/:code',
+      name: 'accountConfirmed',
+      component: () => import('./components/layouts/default/toolbar/user/login-registration/AccountSubmitted.vue')
+    },
+    {
       path: '/login',
       name: 'login',
       component: () => import('./components/layouts/default/toolbar/user/login-registration/Login.vue')

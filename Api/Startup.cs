@@ -1,10 +1,15 @@
 ﻿using Api.Configurations;
+using AutoMapper;
 using KapersStore.ApplicationLogic.ExtensionMethods;
 using KapersStore.ApplicationLogic.UserManagement.Abstractions;
+using KapersStore.DataAccess;
+using KapersStore.Domain.MailManagement;
+using KapersStore.Infrastructure.Helpers.MailSender.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
@@ -12,9 +17,6 @@ using Microsoft.OpenApi.Models;
 using System;
 using System.Text;
 using System.Threading.Tasks;
-using AutoMapper;
-using Microsoft.EntityFrameworkCore;
-using KapersStore.DataAccess;
 
 namespace Api
 {
@@ -40,6 +42,12 @@ namespace Api
             });
 
             //Configure AppSettings
+            var mailUserSection = Configuration.GetSection("MailUser");
+            services.Configure<KapersStore.Infrastructure.Helpers.MailSender.Models.MailUser>(mailUserSection);
+
+            var mailClientSection = Configuration.GetSection("MailClient");
+            services.Configure<MailClientConfiguration>(mailClientSection);
+
             var appSettingsSection = Configuration.GetSection("AppSettings");
             services.Configure<AppSettings>(appSettingsSection);
             var appSettings = appSettingsSection.Get<AppSettings>();

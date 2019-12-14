@@ -12,5 +12,7 @@ namespace KapersStore.ApplicationLogic.UserManagement.Abstractions
         void Registrate(UserRegistrateDTO user);
         UserDTO GetById(int id);
         void RequestResetPasswordMail(string email);
+        void ConfirmEmail(string email, string code);
+        void ResetPassword(string email, string userCode, string newPassword);
     }
 }

@@ -26,12 +26,10 @@
               </v-text-field>
             </v-flex>
             <v-flex>
-              <span class="red--text link-text">{{$t('Forgot password?')}}</span>
+              <span @click="goToPasswordReset()" class="red--text link-text">{{$t('Forgot password?')}}</span>
             </v-flex>
             <v-flex>
-              <router-link to="/registration" tag="div">
-                <span class="red--text link-text">{{$t('Create new account')}}</span>
-              </router-link>
+              <span @click="goToRegistration()" class="red--text link-text">{{$t('Create new account')}}</span>
             </v-flex>
           </v-layout>
         </v-container>
@@ -58,6 +56,7 @@ import { Component, Prop, Watch, Mixins } from "vue-property-decorator";
 import { validationMixin } from 'vuelidate';
 import { required, maxLength, minLength, email } from 'vuelidate/lib/validators'
 import { isNullOrUndefined } from 'util';
+import EventBus from '@/plugins/eventBus.ts';
 
 @Component({
   mixins: [validationMixin],
@@ -69,6 +68,8 @@ import { isNullOrUndefined } from 'util';
 export default class LoginForm extends Vue {
   email: string = '';
   password: string = '';
+
+
 
   get emailErrors(): any[] {
     const errors = [] as any;
@@ -92,7 +93,17 @@ export default class LoginForm extends Vue {
   }
 
   closeDialog() {
-    this.$emit('closeDialog');
+    EventBus.$emit('login-pop-up:close');
+  }
+
+  goToRegistration() {
+    this.closeDialog();
+    this.$router.push({name: 'registration'});
+  }
+
+  goToPasswordReset() {
+    this.closeDialog();
+    this.$router.push({name: 'passwordRequestReset'});
   }
 
   submit() {

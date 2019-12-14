@@ -12,7 +12,7 @@ namespace KapersStore.DataAccess
         public DataContext(DbContextOptions<DataContext> options) : base(options)
         {
             //Database.EnsureDeleted();
-            Database.EnsureCreated();
+            //Database.EnsureCreated();
         }
 
         public DbSet<User> Users { get; set; }

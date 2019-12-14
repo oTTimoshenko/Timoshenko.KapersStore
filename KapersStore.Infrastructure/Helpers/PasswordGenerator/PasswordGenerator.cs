@@ -46,8 +46,13 @@ namespace KapersStore.Infrastructure.Helpers.PasswordGenerator
                     }
                     else
                     {
-                        characterBuffer[iter] = Punctuations[i - 62];
-                        count++;
+                        if (count < numberOfNonAlphanumericCharacters)
+                        {
+                            characterBuffer[iter] = Punctuations[i - 62];
+                            count++;
+                        }
+                        else
+                            characterBuffer[iter] = (char)('A' + 15);
                     }
                 }
 

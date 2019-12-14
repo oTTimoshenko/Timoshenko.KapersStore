@@ -18,6 +18,8 @@ Vue.prototype.apiService = apiService;
 const token = localStorage.getItem(constants.userToken);
 if(token) axios.defaults.headers.common[constants.authorizationHeaderName] = token;
 
+axios.defaults.headers.common[constants.locale] = i18n.locale.toUpperCase();
+
 Vue.use(VueRouter);
 Vue.use(Vuetify);
 Vue.use(Vuelidate);

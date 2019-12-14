@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
-using System.Text;
-using KapersStore.Infrastructure.Helpers.MailSender.Models;
+﻿using KapersStore.Infrastructure.Helpers.MailSender.Models;
 using MailKit.Net.Smtp;
+using Microsoft.Extensions.Options;
 using MimeKit;
 using MimeKit.Text;
-using Org.BouncyCastle.Crypto.Tls;
+using System;
+using System.Linq;
 
 namespace KapersStore.Infrastructure.Helpers.MailSender
 {
@@ -16,10 +13,10 @@ namespace KapersStore.Infrastructure.Helpers.MailSender
         private readonly MailUser userFrom;
         private readonly MailClientConfiguration clientConfig;
 
-        public MailKitSender()
+        public MailKitSender(IOptions<MailUser> userOptions, IOptions<MailClientConfiguration> clientOptions)
         {
-            userFrom = (MailUser) ConfigurationManager.GetSection("MailUser");
-            clientConfig = (MailClientConfiguration) ConfigurationManager.GetSection("MailClient");
+            userFrom = userOptions.Value;
+            clientConfig = clientOptions.Value;
         }
 
         public SendResult Send(SendMailModel model)
@@ -27,7 +24,6 @@ namespace KapersStore.Infrastructure.Helpers.MailSender
             try
             {
                 var mailMessage = new MimeMessage();
-
                 mailMessage.From.Add(new MailboxAddress(userFrom.Name, userFrom.Email));
                 mailMessage.To.AddRange(model.EmailsToSend.Select(email => new MailboxAddress("", email)));
 
@@ -39,7 +35,8 @@ namespace KapersStore.Infrastructure.Helpers.MailSender
 
                 using (var client = new SmtpClient())
                 {
-                    client.Connect(clientConfig.Host, clientConfig.Port, false);
+                    client.Connect(clientConfig.Host, clientConfig.Port, clientConfig.UseSsl);
+                    
                     client.Authenticate(userFrom.Email, userFrom.Password);
 
                     client.Send(mailMessage);

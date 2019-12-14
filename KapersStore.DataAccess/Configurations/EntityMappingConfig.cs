@@ -25,8 +25,13 @@ namespace KapersStore.DataAccess
             userEntity.Property(entity => entity.Email).HasMaxLength(50);
             userEntity.Property(entity => entity.Email).IsRequired();
 
-            userEntity.Property(entity => entity.Status).HasMaxLength(20);
+            userEntity.Property(entity => entity.IsConfirmed).IsRequired().HasDefaultValue(false);
             userEntity.Property(entity => entity.Email).IsRequired();
+
+            userEntity
+                .HasOne(entity => entity.Cart)
+                .WithOne(entity => entity.User)
+                .HasForeignKey<Cart>(x => x.UserId);
         }
 
         public static void BuildKaper(this ModelBuilder modelBuilder)

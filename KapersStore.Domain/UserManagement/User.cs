@@ -11,7 +11,7 @@ namespace KapersStore.Domain.UserManagement
         public string Code { get; set; }    
         public string Nickname { get; set; }
         public string Email { get; set; }
-        public string Status { get; set; }
+        public bool IsConfirmed { get; set; }
         public byte[] PasswordHash { get; set; }
         public byte[] PasswordSalt { get; set; }
 
@@ -26,5 +26,7 @@ namespace KapersStore.Domain.UserManagement
             Purchases = new List<Purchase>();
             MailUsers = new List<MailUser>();
         }
+
+        public void Confirm() => IsConfirmed = true;
     }
 }

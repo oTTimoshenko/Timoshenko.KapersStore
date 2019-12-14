@@ -1,17 +1,15 @@
 ﻿using AutoMapper;
+using KapersStore.ApplicationLogic.MailManagement.Abstractions;
 using KapersStore.ApplicationLogic.UserManagement.Abstractions;
 using KapersStore.ApplicationLogic.UserManagement.DTO;
 using KapersStore.DataAccess;
 using KapersStore.Domain.UserManagement;
 using KapersStore.Infrastructure.Exceptions;
 using KapersStore.Infrastructure.ExtensionMethods;
-using KapersStore.Infrastructure.Helpers.MailSender;
-using KapersStore.Infrastructure.Helpers.MailSender.Models;
+using KapersStore.Infrastructure.Helpers.PasswordGenerator;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using KapersStore.Infrastructure.Helpers.PasswordGenerator;
 
 namespace KapersStore.ApplicationLogic.UserManagement
 {
@@ -19,13 +17,13 @@ namespace KapersStore.ApplicationLogic.UserManagement
     {
         private readonly DataContext dataContext;
         private readonly IMapper mapper;
-        private readonly IMailSender mailSender;
+        private readonly IMailService mailService;
 
-        public UserService(DataContext dataContext, IMapper mapper, IMailSender mailSender)
+        public UserService(DataContext dataContext, IMapper mapper, IMailService mailService)
         {
             this.dataContext = dataContext;
             this.mapper = mapper;
-            this.mailSender = mailSender;
+            this.mailService = mailService;
         }
 
         public UserDTO Authenticate(string email, string password)
@@ -33,7 +31,7 @@ namespace KapersStore.ApplicationLogic.UserManagement
             if (string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(password))
                 return null;
 
-            var user = GetUserByEmail(email);
+            var user = FindUserByEmail(email);
 
             if (user is null) return null;
 
@@ -52,22 +50,64 @@ namespace KapersStore.ApplicationLogic.UserManagement
 
             CreatePasswordHash(userData.Password, out byte[] passwordHash, out byte[] passwordSalt);
 
+            string userCode = PasswordGenerator.Generate(10, 0);
+
             dataContext.Users.Add(new User()
             {
                 Nickname = userData.Nickname,
                 Email = userData.Email,
                 PasswordHash = passwordHash,
-                PasswordSalt = passwordSalt
+                PasswordSalt = passwordSalt,
+                IsConfirmed = false,
+                Code = userCode
             });
 
             dataContext.SaveChanges();
+
+            SendConfirmationMail(userData.Email, userCode);
+        }
+
+        public void ConfirmEmail(string email, string code)
+        {
+            var user = FindUserByEmail(email);
+
+            if (user is null || !user.Code.Equals(code))
+                throw new ArgumentException("Something went wrong");
+
+            user.Confirm();
+
+            dataContext.SaveChanges();
+        }
+
+        public void ResetPassword(string email, string userCode, string newPassword)
+        {
+            var user = dataContext.Users.FirstOrDefault(u => u.Email.Equals(email) && u.Code.Equals(userCode));
+
+            if (user is null) throw new ArgumentException("Something went wrong");
+
+            CreatePasswordHash(newPassword, out byte[] passwordHash, out byte[] passwordSalt);
+
+            user.PasswordHash = passwordHash;
+            user.PasswordSalt = passwordSalt;
+
+            user.Code = PasswordGenerator.Generate(10, 0);
+
+            dataContext.SaveChanges();
+        }
+
+        public void RequestResetPasswordMail(string email)
+        {
+            var user = FindUserByEmail(email);
+            string resetUrl = $"http://localhost:8080/password/reset/{user?.Email ?? "empty"}/{user?.Code ?? "empty"}";
+
+            mailService.SendResetPasswordMail(email, resetUrl);
         }
 
         public UserDTO GetById(int id) =>
             mapper.Map<UserDTO>(dataContext.Users.Get(id));
 
 
-        private User GetUserByEmail(string email) =>
+        private User FindUserByEmail(string email) =>
             dataContext.Users.SingleOrDefault(user => user.Email.Equals(email));
 
         private static void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
@@ -100,45 +140,11 @@ namespace KapersStore.ApplicationLogic.UserManagement
             return true;
         }
 
-        public void ResetPassword(string userCode, string newPassword)
+        private void SendConfirmationMail(string email, string userCode)
         {
-            var user = dataContext.Users.FirstOrDefault(u => u.Code.Equals(userCode));
+            string confirmUrl = $"http://localhost:8080/user-confirmation/{email}/{userCode}";//$"http://localhost:3434/apiForConfirm?token={userCode}"; //TODO: get data from appsettings
 
-            if (user is null) throw new ArgumentException("Something went wrong");
-
-            CreatePasswordHash(newPassword, out byte[] passwordHash, out byte[] passwordSalt);
-
-            user.PasswordHash = passwordHash;
-            user.PasswordSalt = passwordSalt;
-
-            user.Code = PasswordGenerator.Generate(10, 0);
-
-            dataContext.SaveChanges();
-        }
-
-        public void RequestResetPasswordMail(string email)
-        {
-            var user = GetUserByEmail(email);
-
-            string resetUrl = $"localhost/resetPageUrl?token={user?.Code ?? "empty"}";
-
-            SendResetPasswordMail(email, resetUrl);
-        }
-
-        private SendResult SendResetPasswordMail(string email, string resetUrl)
-        {
-            var sendModel = new SendMailModel
-            {
-                EmailsToSend = new List<string>() { email },
-                Mail = new Mail // TODO: Get the data from app.settings
-                {
-                    Subject = "Reset Password On Kapers Store",
-                    Body = $"Hi, click <a href=\"{resetUrl}\">here</a> to reset ur password",
-                    IsHtml = true
-                }
-            };
-
-            return mailSender.Send(sendModel);
+            mailService.SendConfirmEmailMail(email, confirmUrl);
         }
     }
 }

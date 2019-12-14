@@ -3,13 +3,12 @@ using KapersStore.ApplicationLogic.MailManagement.Abstractions;
 using KapersStore.ApplicationLogic.MailManagement.DTO;
 using KapersStore.ApplicationLogic.MailManagement.ExtensionMethods;
 using KapersStore.DataAccess;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using KapersStore.Domain.MailManagement;
 using KapersStore.Infrastructure.ExtensionMethods;
 using KapersStore.Infrastructure.Helpers.MailSender;
 using KapersStore.Infrastructure.Helpers.MailSender.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using Mail = KapersStore.Infrastructure.Helpers.MailSender.Models.Mail;
 
 namespace KapersStore.ApplicationLogic.MailManagement
@@ -40,6 +39,38 @@ namespace KapersStore.ApplicationLogic.MailManagement
         public IEnumerable<MailDTO> GetUserMails(int userId) =>
             dataContext.MailUsers.Where(mailUser => mailUser.UserId == userId)
                                  .Select(mailUser => mailUser.ToMailDto());
+
+        public SendResult SendResetPasswordMail(string email, string resetUrl)
+        {
+            var sendModel = new SendMailModel
+            {
+                EmailsToSend = new List<string>() { email },
+                Mail = new Mail // TODO: Get the data from app.settings
+                {
+                    Subject = "Reset Password On Kapers Store",
+                    Body = $"<html><head></head><body><p>Hi, click <a href=\"{resetUrl}\">here</a> to reset ur password</p></body>",
+                    IsHtml = true
+                }
+            };
+
+            return mailSender.Send(sendModel);
+        }
+
+        public SendResult SendConfirmEmailMail(string email, string confirmUrl)
+        {
+            var sendModel = new SendMailModel
+            {
+                EmailsToSend = new List<string>() { email },
+                Mail = new Mail // TODO: Get the data from app.settings
+                {
+                    Subject = "Confirm Account for Kapers Store",
+                    Body = $"<html><head></head><body><p>Hi, click <a href=\"{confirmUrl}\">here</a> to confirm ur email</p></body>",
+                    IsHtml = true
+                }
+            };
+
+            return mailSender.Send(sendModel);
+        }
 
         public void SendMailToUsers(MailSendDTO sendDto)
         {
@@ -78,7 +109,7 @@ namespace KapersStore.ApplicationLogic.MailManagement
                 User = user,
                 IsSent = isSent,
                 Mail = mail,
-                DateSent = isSent ? DateTime.UtcNow : (DateTime?) null
+                DateSent = isSent ? DateTime.UtcNow : (DateTime?)null
             });
 
             dataContext.MailUsers.AddRange(mailUsers);

@@ -1,4 +1,5 @@
-﻿using Api.Configurations;
+﻿using Api.Abstractions;
+using Api.Configurations;
 using Api.UserManagement.Models;
 using AutoMapper;
 using KapersStore.ApplicationLogic.UserManagement.Abstractions;
@@ -10,10 +11,8 @@ using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Security.Claims;
 using System.Text;
-using Api.Abstractions;
 
 namespace Api.UserManagement
 {
@@ -82,10 +81,46 @@ namespace Api.UserManagement
                 userService.Registrate(userRegistrateDto);
                 return Ok();
             }
-            catch(ValidationException ex)
+            catch (ValidationException ex)
             {
                 return BadRequest(new { message = ex.Message });
             }
+        }
+
+        [AllowAnonymous]
+        [HttpPost("confirmEmail")]
+        public IActionResult ConfirmEmail([FromBody]UserConfirmEmailModel confirmModel)
+        {
+            if (string.IsNullOrWhiteSpace(confirmModel.Email) || string.IsNullOrWhiteSpace(confirmModel.Code))
+                return BadRequest();
+
+            userService.ConfirmEmail(confirmModel.Email, confirmModel.Code);
+
+            return Ok();
+        }
+
+        [AllowAnonymous]
+        [HttpPost("resetPassword")]
+        public IActionResult ResetPassword([FromBody]UserResetPasswordModel resetModel)
+        {
+            if (!resetModel.Validate())
+                return BadRequest();
+
+            userService.ResetPassword(resetModel.Email, resetModel.Code, resetModel.NewPassword);
+
+            return Ok();
+        }
+
+        [AllowAnonymous]
+        [HttpPost("resetPassword/request")]
+        public IActionResult RequestResetPassword([FromBody]UserRequestResetPasswordModel requestResetModel)
+        {
+            if (string.IsNullOrWhiteSpace(requestResetModel.Email))
+                return BadRequest();
+
+            userService.RequestResetPasswordMail(requestResetModel.Email);
+
+            return Ok();
         }
     }
 }

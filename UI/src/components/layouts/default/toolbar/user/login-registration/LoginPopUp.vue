@@ -15,6 +15,7 @@
 import Vue from "vue";
 import { Component, Prop, Watch } from "vue-property-decorator";
 import LoginForm from './login-form.vue';
+import EventBus from '@/plugins/eventBus.ts';
 
 @Component({
   components: {
@@ -26,6 +27,10 @@ export default class LoginPopUp extends Vue {
 
   closeDialog() {
     this.dialog = false;
+  }
+
+  mounted() {
+    EventBus.$on('login-pop-up:close', () => this.dialog = false);
   }
 }
 </script>
